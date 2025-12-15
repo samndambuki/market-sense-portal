@@ -1,0 +1,267 @@
+{
+  "markets": [
+    {
+      "id": 1,
+      "name": "Fintech",
+      "category": "Finance",
+      "region": "Global",
+      "growthRate": 12.5,
+      "description": "Technology-driven financial services reshaping banking, payments, and lending.",
+      "metrics": {
+        "marketSize": "USD 340B",
+        "topPlayers": ["Stripe", "PayPal", "Square"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 2,
+      "name": "AgriTech",
+      "category": "Agriculture",
+      "region": "Africa",
+      "growthRate": 18.2,
+      "description": "Innovative technologies improving agricultural productivity and supply chains.",
+      "metrics": {
+        "marketSize": "USD 45B",
+        "topPlayers": ["Twiga", "FarmCrowdy"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 3,
+      "name": "HealthTech",
+      "category": "Healthcare",
+      "region": "North America",
+      "growthRate": 14.1,
+      "description": "Digital solutions transforming healthcare delivery and patient engagement.",
+      "metrics": {
+        "marketSize": "USD 280B",
+        "topPlayers": ["Teladoc", "Cerner"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 4,
+      "name": "EdTech",
+      "category": "Education",
+      "region": "Global",
+      "growthRate": 16.7,
+      "description": "Technology-enabled learning platforms and digital education tools.",
+      "metrics": {
+        "marketSize": "USD 220B",
+        "topPlayers": ["Coursera", "Byju's"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 5,
+      "name": "E-commerce",
+      "category": "Retail",
+      "region": "Asia",
+      "growthRate": 11.3,
+      "description": "Online retail platforms driving digital consumer commerce.",
+      "metrics": {
+        "marketSize": "USD 5T",
+        "topPlayers": ["Alibaba", "Amazon"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Clean Energy",
+      "category": "Energy",
+      "region": "Europe",
+      "growthRate": 19.5,
+      "description": "Renewable energy solutions focused on sustainability and carbon reduction.",
+      "metrics": {
+        "marketSize": "USD 1.2T",
+        "topPlayers": ["Vestas", "Siemens Energy"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Cybersecurity",
+      "category": "Technology",
+      "region": "Global",
+      "growthRate": 13.9,
+      "description": "Protection of digital systems against cyber threats and attacks.",
+      "metrics": {
+        "marketSize": "USD 190B",
+        "topPlayers": ["Palo Alto", "CrowdStrike"],
+        "riskLevel": "High"
+      }
+    },
+    {
+      "id": 8,
+      "name": "InsurTech",
+      "category": "Finance",
+      "region": "Europe",
+      "growthRate": 10.4,
+      "description": "Technology disrupting insurance underwriting and claims management.",
+      "metrics": {
+        "marketSize": "USD 150B",
+        "topPlayers": ["Lemonade", "Root"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 9,
+      "name": "PropTech",
+      "category": "Real Estate",
+      "region": "North America",
+      "growthRate": 9.8,
+      "description": "Digital platforms transforming property buying, selling, and management.",
+      "metrics": {
+        "marketSize": "USD 110B",
+        "topPlayers": ["Zillow", "Opendoor"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Logistics Tech",
+      "category": "Supply Chain",
+      "region": "Asia",
+      "growthRate": 15.6,
+      "description": "Technology enhancing logistics efficiency and last-mile delivery.",
+      "metrics": {
+        "marketSize": "USD 260B",
+        "topPlayers": ["Flexport", "Cainiao"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 11,
+      "name": "TravelTech",
+      "category": "Travel",
+      "region": "Global",
+      "growthRate": 8.9,
+      "description": "Digital platforms modernising travel booking and experiences.",
+      "metrics": {
+        "marketSize": "USD 300B",
+        "topPlayers": ["Booking.com", "Expedia"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Gaming",
+      "category": "Entertainment",
+      "region": "Asia",
+      "growthRate": 17.4,
+      "description": "Interactive digital gaming across mobile, PC, and consoles.",
+      "metrics": {
+        "marketSize": "USD 210B",
+        "topPlayers": ["Tencent", "Sony"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 13,
+      "name": "AI & Machine Learning",
+      "category": "Technology",
+      "region": "Global",
+      "growthRate": 22.8,
+      "description": "Artificial intelligence solutions powering automation and analytics.",
+      "metrics": {
+        "marketSize": "USD 500B",
+        "topPlayers": ["OpenAI", "Google"],
+        "riskLevel": "High"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Biotechnology",
+      "category": "Healthcare",
+      "region": "North America",
+      "growthRate": 11.9,
+      "description": "Biological research and innovation in medicine and genetics.",
+      "metrics": {
+        "marketSize": "USD 420B",
+        "topPlayers": ["Moderna", "Gilead"],
+        "riskLevel": "High"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Smart Cities",
+      "category": "Infrastructure",
+      "region": "Europe",
+      "growthRate": 14.8,
+      "description": "Urban development powered by IoT and data-driven planning.",
+      "metrics": {
+        "marketSize": "USD 900B",
+        "topPlayers": ["Cisco", "IBM"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 16,
+      "name": "FoodTech",
+      "category": "Food",
+      "region": "Global",
+      "growthRate": 13.3,
+      "description": "Technology reshaping food production, delivery, and consumption.",
+      "metrics": {
+        "marketSize": "USD 260B",
+        "topPlayers": ["Impossible Foods", "Beyond Meat"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 17,
+      "name": "MarTech",
+      "category": "Marketing",
+      "region": "Global",
+      "growthRate": 12.1,
+      "description": "Marketing automation and analytics platforms.",
+      "metrics": {
+        "marketSize": "USD 390B",
+        "topPlayers": ["HubSpot", "Salesforce"],
+        "riskLevel": "Low"
+      }
+    },
+    {
+      "id": 18,
+      "name": "Telecommunications",
+      "category": "Connectivity",
+      "region": "Africa",
+      "growthRate": 9.6,
+      "description": "Mobile and broadband connectivity solutions.",
+      "metrics": {
+        "marketSize": "USD 1.8T",
+        "topPlayers": ["MTN", "Vodafone"],
+        "riskLevel": "Medium"
+      }
+    },
+    {
+      "id": 19,
+      "name": "Financing & Lending",
+      "category": "Finance",
+      "region": "Asia",
+      "growthRate": 10.9,
+      "description": "Digital lending platforms and alternative financing models.",
+      "metrics": {
+        "marketSize": "USD 600B",
+        "topPlayers": ["Ant Financial", "SoFi"],
+        "riskLevel": "High"
+      }
+    },
+    {
+      "id": 20,
+      "name": "SpaceTech",
+      "category": "Aerospace",
+      "region": "Global",
+      "growthRate": 21.3,
+      "description": "Commercial space exploration, satellites, and launch services.",
+      "metrics": {
+        "marketSize": "USD 470B",
+        "topPlayers": ["SpaceX", "Blue Origin"],
+        "riskLevel": "High"
+      }
+    }
+  ],
+  "countries": [],
+  "insights": [],
+  "strategies": []
+}
