@@ -16,7 +16,7 @@ export class MarketService {
     this.loading = true;
     this.error = null;
 
-     this.http.get<Market[]>(API_ENDPOINTS.markets).subscribe({
+    this.http.get<Market[]>(API_ENDPOINTS.markets).subscribe({
       next: (data) => {
         this.markets = data;
         this.loading = false;
