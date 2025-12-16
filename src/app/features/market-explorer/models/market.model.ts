@@ -2,9 +2,9 @@ export interface Market {
   id: number;
   name: string;
   category: string;
-  region: string;
-  growthRate: string;
+  region:string;
   description: string;
+  growthRate: string;
   metrics: {
     marketSize: string;
     topLayers: string[];

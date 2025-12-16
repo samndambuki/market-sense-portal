@@ -7,27 +7,24 @@ import { API_ENDPOINTS } from '../../../core/config/api-endpoints';
   providedIn: 'root',
 })
 export class MarketService {
-  constructor(private http: HttpClient) {}
   markets: Market[] = [];
-  loading: boolean = false;
+  loading: boolean | string = false;
   error: boolean | null = null;
-
-  loadMarkets(): void {
+  constructor(private http: HttpClient) {}
+  loadMarkets() {
     this.loading = true;
     this.error = null;
-
     this.http.get<Market[]>(API_ENDPOINTS.markets).subscribe({
       next: (data) => {
         this.markets = data;
         this.loading = false;
       },
       error: () => {
-        this.error = true;
         this.loading = false;
+        this.error = true;
       },
     });
   }
-
   getMarket(id: number) {
     return this.http.get<Market>(`${API_ENDPOINTS.markets}/${id}`);
   }
