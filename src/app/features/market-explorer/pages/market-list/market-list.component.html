@@ -1,1 +1,24 @@
-<p>market-list works!</p>
+<div class="p-6 max-w-7xl mx-auto">
+  <!-- header  -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-900">Market explorer</h1>
+    <p class="text-sm text-gray-500">Discover and analyse emerging markets</p>
+  </div>
+
+  <!-- loading -->
+  <div *ngIf="marketService.loading">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div *ngFor="let _ of [1, 2, 3, 4, 5, 6]">
+        <div class="h-40 bg-gray-100 rounded-lg animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- error -->
+  <div
+    *ngIf="marketService.error"
+    class="p-4 bg-red-50 text-red-600 rounded-md"
+  >
+    Failed to load markets. Please try again
+  </div>
+</div>
