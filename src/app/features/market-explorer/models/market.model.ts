@@ -2,12 +2,12 @@ export interface Market {
   id: number;
   name: string;
   category: string;
-  region:string;
+  region: string;
   description: string;
-  growthRate: string;
+  growthRate: number;
   metrics: {
     marketSize: string;
-    topLayers: string[];
+    topPlayers: string[];
     riskLevel: 'Low' | 'Medium' | 'High';
   };
 }

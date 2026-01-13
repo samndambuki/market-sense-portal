@@ -1,8 +1,8 @@
 <div class="p-6 max-w-7xl mx-auto">
   <!-- header  -->
   <div class="mb-6">
-    <h1 class="text-2xl font-semibold text-gray-900">Market explorer</h1>
-    <p class="text-sm text-gray-500">Discover and analyse emerging markets</p>
+    <h1 class="text-xl font-semibold text-gray-900">Market explorer</h1>
+    <p class="text-md text-gray-500">Discover and analyse emerging markets</p>
   </div>
 
   <!-- loading -->
@@ -20,5 +20,69 @@
     class="p-4 bg-red-50 text-red-600 rounded-md"
   >
     Failed to load markets. Please try again
+  </div>
+
+  <!-- grid  -->
+  <div
+    *ngIf="!marketService.loading && !marketService.error"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    <div
+      *ngFor="let market of marketService.markets"
+      class="shadow-md m-5 rounded-lg hover:shadow-md p-5 transition cursor-pointer bg-white"
+    >
+      <div class="flex justify-between items-start mb-3">
+        <h3 class="text-md font-medium text-gray-500">
+          {{ market.name }}
+        </h3>
+        <span
+          class="text-xs rounded-full px-2 py-1"
+          [ngClass]="{
+            'bg-green-100 text-green-700': market.growthRate >= 15,
+            'bg-yellow-100 text-yellow-700':
+              market.growthRate >= 10 && market.growthRate < 15,
+            'bg-red-100 text-red-700': market.growthRate < 10
+          }"
+        >
+          {{
+            market.growthRate >= 15
+              ? "High"
+              : market.growthRate >= 10
+              ? "Medium"
+              : "Low"
+          }}
+        </span>
+      </div>
+      <div class="text-sm text-gray-500 mb-2">
+        {{ market.category }} . {{ market.region }}
+      </div>
+      <div class="line-clamp-3 text-gray-600 text-sm mb-2">
+        {{ market.description }}
+      </div>
+      <div class="flex justify-between text-gray-600 text-sm mb-2">
+        <span>Risk Level</span>
+        <span
+          class="font-medium"
+          [ngClass]="{
+            'text-green-700': market.metrics.riskLevel === 'Low',
+            'text-yellow-700': market.metrics.riskLevel === 'Medium',
+            'text-red-700': market.metrics.riskLevel === 'High'
+          }"
+        >
+          {{ market.metrics.riskLevel }}
+        </span>
+      </div>
+      <div class="text-gray-600">
+        <span class="block mb-1 text-sm">Top Players</span>
+        <div class="flex flex-wrap gap-1">
+          <span
+            class="px-2 py-1 rounded bg-gray-100 text-xs"
+            *ngFor="let player of market.metrics.topPlayers"
+          >
+            {{ player }}
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
