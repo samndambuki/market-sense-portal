@@ -8,10 +8,55 @@
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
     <!-- search  -->
     <input
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
       type="text"
       placeholder="Search markets..."
-      class="rounded-md py-1 px-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+      class="border border-blue-500 rounded-md py-1 px-3 text-sm w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
+    <!-- category  -->
+    <select
+      [(ngModel)]="selectedCategory"
+      (change)="applyFilters()"
+      class="border border-blue-500 rounded-md text-sm px-3 py-1 cursor-pointer"
+    >
+      <option value="All">All Categories</option>
+      <option>Finance</option>
+      <option>Technology</option>
+      <option>Healthcare</option>
+      <option>Education</option>
+      <option>Agriculture</option>
+      <option>Energy</option>
+      <option>Retail</option>
+      <option>Entertainment</option>
+      <option>Infrastructure</option>
+    </select>
+
+    <!-- region  -->
+    <select
+      [(ngModel)]="selectedRegion"
+      class="border border-blue-500 px-3 py-1 rounded-md"
+      (change)="applyFilters()"
+    >
+      <option value="All">All Regions</option>
+      <option>Global</option>
+      <option>Africa</option>
+      <option>Asia</option>
+      <option>Europe</option>
+      <option>North America</option>
+    </select>
+
+    <!-- growth  -->
+    <select
+      [(ngModel)]="selectedGrowth"
+      class="border border-blue-500 px-3 py-1 rounded-md cursor-pointer"
+      (change)="applyFilters()"
+    >
+      <option value="All">All Growth Levels</option>
+      <option>High</option>
+      <option>Medium</option>
+      <option>Low</option>
+    </select>
   </div>
 
   <!-- loading -->
@@ -37,7 +82,7 @@
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
   >
     <div
-      *ngFor="let market of marketService.markets"
+      *ngFor="let market of filteredMarkets"
       class="shadow-md m-5 rounded-lg hover:shadow-md p-5 transition cursor-pointer bg-white"
     >
       <div class="flex justify-between items-start mb-3">
@@ -50,15 +95,15 @@
             'bg-green-100 text-green-700': market.growthRate >= 15,
             'bg-yellow-100 text-yellow-700':
               market.growthRate >= 10 && market.growthRate < 15,
-            'bg-red-100 text-red-700': market.growthRate < 10
+            'bg-red-100 text-red-700': market.growthRate < 10,
           }"
         >
           {{
             market.growthRate >= 15
               ? "High"
               : market.growthRate >= 10
-              ? "Medium"
-              : "Low"
+                ? "Medium"
+                : "Low"
           }}
         </span>
       </div>
@@ -75,7 +120,7 @@
           [ngClass]="{
             'text-green-700': market.metrics.riskLevel === 'Low',
             'text-yellow-700': market.metrics.riskLevel === 'Medium',
-            'text-red-700': market.metrics.riskLevel === 'High'
+            'text-red-700': market.metrics.riskLevel === 'High',
           }"
         >
           {{ market.metrics.riskLevel }}
