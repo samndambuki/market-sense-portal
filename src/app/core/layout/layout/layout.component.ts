@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../sidebar/sidebar/sidebar.component';
+import { TopbarComponent } from "../topbar/topbar/topbar.component";
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterOutlet, SidebarComponent, TopbarComponent],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrl: './layout.component.scss',
 })
-export class LayoutComponent {
-
-}
+export class LayoutComponent {}

@@ -24,6 +24,8 @@ export class MarketListComponent implements OnInit {
     this.marketService.loadMarkets();
   }
 
+  //angular checking in repeatedly - has anything important changed?
+  //if the data is already and haven't grabbed it, grab it
   ngDoCheck(): void {
     if (
       !this.marketService.loading &&
