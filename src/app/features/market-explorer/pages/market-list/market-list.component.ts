@@ -19,11 +19,19 @@ export class MarketListComponent implements OnInit {
   filteredMarkets: Market[] = [];
 
   constructor(public marketService: MarketService) {}
+
   ngOnInit(): void {
     this.marketService.loadMarkets();
-    setTimeout(() => {
+  }
+
+  ngDoCheck(): void {
+    if (
+      !this.marketService.loading &&
+      this.marketService.markets.length &&
+      this.filteredMarkets.length === 0
+    ) {
       this.filteredMarkets = this.marketService.markets;
-    }, 0);
+    }
   }
 
   applyFilters() {
