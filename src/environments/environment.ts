@@ -8,7 +8,7 @@ export const environment = {
   },
   ai: {
     baseUrl: 'http://localhost:4000',
-    marketSummary: '/ai/marketSummary',
+    marketSummary: '/ai/market-summary',
     countryAnalysis: '/ai/country-analysis',
     strategyEvaluation: '/ai/strategy-evaluation',
     recommendations: '/ai/recommendations',

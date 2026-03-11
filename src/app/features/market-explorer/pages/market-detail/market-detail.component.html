@@ -1,1 +1,10 @@
-<p>market-detail works!</p>
+<div class="border-t mt-4 pt-4">
+  <!-- loading  -->
+  <div *ngIf="loadingAI" class="text-gray-500 italic">Generating insights</div>
+  <!-- error  -->
+  <div *ngIf="errorAI" class="text-red-500">Failed to generate insights</div>
+  <!-- result  -->
+  <div *ngIf="insights && !loadingAI" class="text-gray-700 whitespace-pre-wrap">
+    {{ insights }}
+  </div>
+</div>

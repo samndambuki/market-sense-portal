@@ -3,10 +3,11 @@ import { MarketService } from '../../services/market.service';
 import { CommonModule } from '@angular/common';
 import { Market } from '../../models/market.model';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-market-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './market-list.component.html',
   styleUrl: './market-list.component.scss',
 })

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Market } from '../models/market.model';
 import { API_ENDPOINTS } from '../../../core/config/api-endpoints';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,14 @@ export class MarketService {
   }
   getMarket(id: number) {
     return this.http.get<Market>(`${API_ENDPOINTS.markets}/${id}`);
+  }
+  getMarketAIInsights(market: any): Observable<any> {
+    return this.http.post(API_ENDPOINTS.marketSummary, {
+      name: market.name,
+      category: market.category,
+      region: market.region,
+      description: market.description,
+      metrics: market.metrics,
+    });
   }
 }
