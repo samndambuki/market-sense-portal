@@ -18,6 +18,13 @@ export const routes: Routes = [
         redirectTo: 'markets',
         pathMatch: 'full',
       },
+      {
+        path: 'competitor-analysis',
+        loadChildren: () =>
+          import('./features/competitor-analysis/competitor-analysis.routes').then(
+            (m) => m.COMPETITOR_ANALYSIS_ROUTES,
+          ),
+      },
     ],
   },
 ];
