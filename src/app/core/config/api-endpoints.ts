@@ -10,4 +10,5 @@ export const API_ENDPOINTS = {
   countryAnalysis: `${environment.ai.baseUrl}${environment.ai.countryAnalysis}`,
   strategyEvaluation: `${environment.ai.baseUrl}${environment.ai.strategyEvaluation}`,
   recommendations: `${environment.ai.baseUrl}${environment.ai.recommendations}`,
+  competitoranalysis: `${environment.ai.baseUrl}${environment.ai.competitoranalysis}`,
 };
