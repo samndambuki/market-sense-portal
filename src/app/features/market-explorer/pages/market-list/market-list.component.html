@@ -79,7 +79,7 @@
   <!-- grid  -->
   <div
     *ngIf="!marketService.loading && !marketService.error"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4"
   >
     <div
       *ngFor="let market of filteredMarkets"
@@ -99,6 +99,7 @@
             'bg-red-100 text-red-700': market.growthRate < 10,
           }"
         >
+          <span>Growth Rate : </span>
           {{
             market.growthRate >= 15
               ? "High"

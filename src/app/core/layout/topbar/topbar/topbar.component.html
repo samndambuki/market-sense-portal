@@ -1,5 +1,12 @@
-<header class="h-14 bg-white flex items-center px-6">
-  <h1 class="text-sm font-medium text-gray-700">
+<header class="h-14 bg-white flex items-center border-b border-gray-100 px-6">
+  <button
+    (click)="onToggle()"
+    class="p-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
+  >
+    <span class="material-icons">menu</span>
+  </button>
+  <h1 class="text-md font-medium text-gray-700 ml-6">
+    <span class="material-icons align-middle">psychology</span>
     MarketSense Intelligent Portal
   </h1>
 </header>
