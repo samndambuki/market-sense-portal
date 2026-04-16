@@ -4,6 +4,7 @@
     <body>
       <trans-unit id="9047812215067793405" datatype="html">
         <source>MarketSense Intelligent Portal </source>
+         <target>Portail intelligent MarketSense</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/layout/sidebar/sidebar/sidebar.component.html</context>
           <context context-type="linenumber">7,8</context>
@@ -11,6 +12,7 @@
       </trans-unit>
       <trans-unit id="marketexplorer" datatype="html">
         <source>Market Explorer</source>
+        <target>Explorateur de marché</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/layout/sidebar/sidebar/sidebar.component.html</context>
           <context context-type="linenumber">22,28</context>
@@ -21,6 +23,7 @@
       </trans-unit>
       <trans-unit id="8600823373507255974" datatype="html">
         <source> Competitor Analysis</source>
+        <target>Analyse des concurrents</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/layout/sidebar/sidebar/sidebar.component.html</context>
           <context context-type="linenumber">33,34</context>
@@ -28,6 +31,7 @@
       </trans-unit>
       <trans-unit id="marketsensetitle" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-icons align-middle&quot;&gt;"/>psychology<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/> MarketSense Intelligent Portal </source>
+         <target>Portail intelligent MarketSense</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/layout/topbar/topbar/topbar.component.html</context>
           <context context-type="linenumber">12,15</context>
