@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="9047812215067793405" datatype="html">
+        <source>MarketSense Intelligent Portal </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/layout/sidebar/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="marketexplorer" datatype="html">
+        <source>Market Explorer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/layout/sidebar/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">22,28</context>
+        </context-group>
+        <note priority="1" from="description">meant to navigate to market
+          explorer</note>
+        <note priority="1" from="meaning">market explorer tab</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

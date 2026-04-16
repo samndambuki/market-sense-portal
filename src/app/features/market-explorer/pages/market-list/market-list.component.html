@@ -76,6 +76,14 @@
     Failed to load markets. Please try again
   </div>
 
+  <div class="font-semibold italic text-xs mt-6 ml-4" i18n>
+    {filteredMarkets, plural,
+      =0 {No markets avaailable}
+      , =1 {One Market Available}
+      other {A total of {{filteredMarkets.length}} markets available}
+    }
+  </div>
+
   <!-- grid  -->
   <div
     *ngIf="!marketService.loading && !marketService.error"

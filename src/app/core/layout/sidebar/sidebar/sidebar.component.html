@@ -1,10 +1,10 @@
 <div
-  [ngClass]="collapsed ? 'w-44' : 'w-72'"
+  [ngClass]="collapsed ? 'w-52' : 'w-96'"
   class="h-screen bg-blue-900 text-white flex-shrink-0"
 >
   <div class="p-4 font-semibold border-b border-gray-500">
     <span class="material-icons align-middle mr-2">psychology</span>
-    <span *ngIf="!collapsed">MarketSense Intelligent Portal</span>
+    <span *ngIf="!collapsed" i18n>MarketSense Intelligent Portal </span>
     <span *ngIf="collapsed">MS</span>
   </div>
   <nav class="p-4 space-y-2">
@@ -14,7 +14,13 @@
       class="block px-3 py-2 bg-blue-800 hover:bg-blue-700 hover:rounded-md transition rounded-md"
     >
       <span class="material-icons mr-2 align-middle">manage_search</span>
-      <span *ngIf="!collapsed">Market Explorer</span>
+      <span
+        *ngIf="!collapsed"
+        i18n="
+          market explorer tab|meant to navigate to market
+          explorer@@marketexplorer"
+        >Market Explorer</span
+      >
       <span *ngIf="collapsed">ME</span>
     </a>
 
