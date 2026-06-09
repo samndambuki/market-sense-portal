@@ -5,6 +5,7 @@ export const environment = {
     markets: '/markets',
     countries: '/countries',
     strategies: '/strategies',
+    users: '/users',
   },
   ai: {
     baseUrl: 'http://localhost:4000',

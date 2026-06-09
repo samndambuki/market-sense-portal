@@ -5,14 +5,17 @@ import { LoginComponent } from './features/auth/pages/login/login.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    component: LoginComponent,
+    pathMatch: 'full',
+  },
+  {
     path: 'register',
     component: RegisterComponent,
-    pathMatch: 'full',
   },
   {
     path: 'login',
     component: LoginComponent,
-    pathMatch: 'full',
   },
   {
     path: '',
@@ -26,17 +29,21 @@ export const routes: Routes = [
           ),
       },
       {
-        path: '',
-        redirectTo: 'markets',
-        pathMatch: 'full',
-      },
-      {
         path: 'competitor-analysis',
         loadChildren: () =>
           import('./features/competitor-analysis/competitor-analysis.routes').then(
             (m) => m.COMPETITOR_ANALYSIS_ROUTES,
           ),
       },
+      {
+        path: '',
+        redirectTo: 'markets',
+        pathMatch: 'full',
+      },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
   },
 ];
