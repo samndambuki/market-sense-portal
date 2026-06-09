@@ -1,7 +1,19 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout/layout.component';
+import { RegisterComponent } from './features/auth/pages/register/register.component';
+import { LoginComponent } from './features/auth/pages/login/login.component';
 
 export const routes: Routes = [
+  {
+    path: 'register',
+    component: RegisterComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: LayoutComponent,

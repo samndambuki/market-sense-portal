@@ -1,4 +1,13 @@
 {
+  "users": [
+    {
+      "id": "1",
+      "fullname": "Admin User",
+      "email": "admin@marketsense.com",
+      "role": "ADMIN",
+      "password": "12345"
+    }
+  ],
   "markets": [
     {
       "id": 1,

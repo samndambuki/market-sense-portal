@@ -1,15 +1,48 @@
-<header class="h-14 bg-white flex items-center border-b border-gray-100 px-6">
-  <button
-    (click)="onToggle()"
-    class="p-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
-  >
-    <span class="material-icons">menu</span>
-  </button>
-  <h1
-    class="text-md font-medium text-gray-700 ml-6"
-    i18n="topbarTitle|this is the title of the topbar@@marketsensetitle"
-  >
-    <span class="material-icons align-middle">psychology</span>
-    MarketSense Intelligent Portal
-  </h1>
+<header
+  class="h-14 bg-white flex items-center justify-between border-b border-gray-100 px-6"
+>
+  <div class="flex items-center gap-2">
+    <button
+      (click)="onToggle()"
+      class="p-2 rounded-md hover:bg-gray-100 transition cursor-pointer"
+    >
+      <span class="material-icons">menu</span>
+    </button>
+    <h1 class="text-md font-medium text-gray-700">
+      <span class="material-icons align-middle">psychology</span>
+      {{ "TITLE" | translate }}
+    </h1>
+  </div>
+
+  <div class="relative">
+    <button
+      (click)="toggleLang()"
+      class="flex items-center gap-1 px-3 py-1.5 border border-gray-200 rounded-md text-sm font-medium hover:bg-gray-50 transition"
+    >
+      <span>{{ currentLang.flag }}</span>
+      <span>{{ currentLang.code }}</span>
+      <span class="material-icons text-gray-400 text-base">expand_more</span>
+    </button>
+
+    <div
+      *ngIf="langOpen"
+      class="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-md shadow-sm z-50 cursor-pointer"
+    >
+      <button
+        *ngFor="let lang of languages"
+        (click)="switchLang(lang)"
+        class="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-50 transition cursor-pointer"
+        [class.text-blue-600]="lang.code === currentLang.code"
+        [class.font-medium]="lang.code === currentLang.code"
+      >
+        <span>{{ lang.flag }}</span>
+        <span>{{ lang.label }}</span>
+        <span
+          *ngIf="lang.code === currentLang.code"
+          class="ml-auto text-blue-500"
+          >✓</span
+        >
+      </button>
+    </div>
+  </div>
 </header>
