@@ -42,7 +42,11 @@
       </div>
 
       <!-- FORM -->
-      <form class="space-y-5">
+      <form
+        class="space-y-5"
+        [formGroup]="registerForm"
+        (ngSubmit)="register()"
+      >
         <!-- FULL NAME -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -51,9 +55,14 @@
 
           <input
             type="text"
+            formControlName="fullName"
             placeholder="John Doe"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
           />
+          @if(registerForm.controls['fullName'].touched &&
+          registerForm.controls['fullName'].hasError('required')){
+          <p class="text-red-500 text-sm mt-1">FullName is required</p>
+          }
         </div>
 
         <!-- EMAIL -->
@@ -64,9 +73,16 @@
 
           <input
             type="email"
+            formControlName="email"
             placeholder="john@example.com"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
           />
+          @if ( registerForm.controls.email.touched &&
+          registerForm.controls.email.invalid ) {
+          <p class="text-red-500 text-sm mt-1">
+            Please enter a valid email address
+          </p>
+          }
         </div>
 
         <!-- ROLE -->
@@ -77,12 +93,17 @@
 
           <select
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500 cursor-pointer"
+            formControlName="role"
           >
             <option value="">Select Role</option>
             <option value="ADMIN">Admin</option>
             <option value="ANALYST">Analyst</option>
             <option value="VIEWER">Viewer</option>
           </select>
+          @if(registerForm.controls['role']?.touched &&
+          registerForm.controls['role'].hasError('required')){
+          <p class="text-red-500 text-sm mt-1">Role is required</p>
+          }
         </div>
 
         <!-- PASSWORD -->
@@ -93,9 +114,14 @@
 
           <input
             type="password"
+            formControlName="password"
             placeholder="********"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
           />
+          @if(registerForm.controls['password'].touched &&
+          registerForm.controls['password'].hasError('required')){
+          <p class="text-red-500 text-sm mt-1">Password is required</p>
+          }
         </div>
 
         <!-- CONFIRM PASSWORD -->
@@ -106,15 +132,21 @@
 
           <input
             type="password"
+            formControlName="confirmPassword"
             placeholder="********"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
           />
+          @if(registerForm.controls['confirmPassword'].touched &&
+          registerForm.controls['confirmPassword'].hasError('required')){
+          <p class="text-red-500 text-sm mt-1">Kindly confirm your password</p>
+          }
         </div>
 
         <!-- BUTTON -->
         <button
           type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition"
+          [disabled]="registerForm.invalid"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition cursor-pointer"
         >
           Create Account
         </button>
