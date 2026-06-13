@@ -121,6 +121,11 @@
           @if(registerForm.controls['password'].touched &&
           registerForm.controls['password'].hasError('required')){
           <p class="text-red-500 text-sm mt-1">Password is required</p>
+          } @if(registerForm.controls['password'].touched &&
+          registerForm.controls['password'].hasError('minlength')){
+          <p class="text-red-500 text-sm mt-1">
+            Password must be atleast 6 characters long
+          </p>
           }
         </div>
 
@@ -139,13 +144,15 @@
           @if(registerForm.controls['confirmPassword'].touched &&
           registerForm.controls['confirmPassword'].hasError('required')){
           <p class="text-red-500 text-sm mt-1">Kindly confirm your password</p>
+          } @if(registerForm.hasError('passwordMismatch') &&
+          registerForm.touched){
+          <p class="text-red-500 text-sm mt-1">Passwords do not match</p>
           }
         </div>
 
         <!-- BUTTON -->
         <button
           type="submit"
-          [disabled]="registerForm.invalid"
           class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition cursor-pointer"
         >
           Create Account
