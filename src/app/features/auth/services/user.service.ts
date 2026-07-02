@@ -10,7 +10,9 @@ export class UserService {
   private userapi = environment.api.baseUrl;
   constructor(private http: HttpClient) {}
   login(email: string) {
-    return this.http.get<User[]>(`${this.userapi}?email=${email}`);
+    return this.http.get<User[]>(
+      `${this.userapi}${environment.api.users}?email=${email}`,
+    );
   }
   register(user: User) {
     return this.http.post<User>(
