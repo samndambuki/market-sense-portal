@@ -7,9 +7,15 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private userapi = environment.api.users;
+  private userapi = environment.api.baseUrl;
   constructor(private http: HttpClient) {}
   login(email: string) {
     return this.http.get<User[]>(`${this.userapi}?email=${email}`);
+  }
+  register(user: User) {
+    return this.http.post<User>(
+      `${this.userapi}${environment.api.users}`,
+      user,
+    );
   }
 }

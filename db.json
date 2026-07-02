@@ -6,11 +6,18 @@
       "email": "admin@marketsense.com",
       "role": "ADMIN",
       "password": "12345"
+    },
+    {
+      "id": "f51a",
+      "fullName": "samuel ndambuki",
+      "email": "sam.ndambuki08@gmail.com",
+      "password": "123456",
+      "role": "ADMIN"
     }
   ],
   "markets": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Fintech",
       "category": "Finance",
       "region": "Global",
@@ -23,7 +30,7 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "AgriTech",
       "category": "Agriculture",
       "region": "Africa",
@@ -36,7 +43,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "HealthTech",
       "category": "Healthcare",
       "region": "North America",
@@ -49,7 +56,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "EdTech",
       "category": "Education",
       "region": "Global",
@@ -62,7 +69,7 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "E-commerce",
       "category": "Retail",
       "region": "Asia",
@@ -75,7 +82,7 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Clean Energy",
       "category": "Energy",
       "region": "Europe",
@@ -88,7 +95,7 @@
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Cybersecurity",
       "category": "Technology",
       "region": "Global",
@@ -101,7 +108,7 @@
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "InsurTech",
       "category": "Finance",
       "region": "Europe",
@@ -114,7 +121,7 @@
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "PropTech",
       "category": "Real Estate",
       "region": "North America",
@@ -127,7 +134,7 @@
       }
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Logistics Tech",
       "category": "Supply Chain",
       "region": "Asia",
@@ -140,7 +147,7 @@
       }
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "TravelTech",
       "category": "Travel",
       "region": "Global",
@@ -153,7 +160,7 @@
       }
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Gaming",
       "category": "Entertainment",
       "region": "Asia",
@@ -166,7 +173,7 @@
       }
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "AI & Machine Learning",
       "category": "Technology",
       "region": "Global",
@@ -179,7 +186,7 @@
       }
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Biotechnology",
       "category": "Healthcare",
       "region": "North America",
@@ -192,7 +199,7 @@
       }
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Smart Cities",
       "category": "Infrastructure",
       "region": "Europe",
@@ -205,7 +212,7 @@
       }
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "FoodTech",
       "category": "Food",
       "region": "Global",
@@ -218,7 +225,7 @@
       }
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "MarTech",
       "category": "Marketing",
       "region": "Global",
@@ -231,7 +238,7 @@
       }
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "Telecommunications",
       "category": "Connectivity",
       "region": "Africa",
@@ -244,7 +251,7 @@
       }
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "Financing & Lending",
       "category": "Finance",
       "region": "Asia",
@@ -257,7 +264,7 @@
       }
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "SpaceTech",
       "category": "Aerospace",
       "region": "Global",
