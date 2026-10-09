@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../../../features/auth/services/user.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
@@ -24,7 +26,11 @@ export class TopbarComponent {
 
   currentLang = this.languages[0];
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private userService: UserService,
+    private router: Router,
+  ) {
     const saved = localStorage.getItem('lang') || 'en';
     this.currentLang =
       this.languages.find((l) => l.code === saved) || this.languages[0];
@@ -40,5 +46,10 @@ export class TopbarComponent {
     this.langOpen = false;
     this.translate.use(lang.code);
     localStorage.setItem('lang', lang.code);
+  }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
   }
 }

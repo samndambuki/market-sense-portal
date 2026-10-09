@@ -32,30 +32,22 @@ export class LoginComponent {
       return;
     }
 
-    const email = this.loginForm.value.email!;
-    const password = this.loginForm.value.password;
+    const credentials = {
+      email: this.loginForm.value.email!,
+      password: this.loginForm.value.password!,
+    };
 
-    this.userService.login(email).subscribe({
-      next: (users) => {
-        if (users.length === 0) {
-          alert('Invalid email or password');
-          return;
-        }
-
-        const user = users[0];
-
-        if (user.password !== password) {
-          alert('Invalid email or password');
-          return;
-        }
-
-        alert('login successful');
-
+    this.userService.login(credentials).subscribe({
+      next: (response) => {
+        localStorage.setItem('access_token', response.token);
+        localStorage.setItem('current_user', JSON.stringify(response.user));
+        alert('Login successful');
         this.router.navigate(['/markets']);
       },
       error: (error) => {
-        console.error(error);
-        alert(error);
+        console.error('Login error', error);
+
+        alert(error.error?.message || 'Unable to log in. Please try again');
       },
     });
   }
