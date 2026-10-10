@@ -10,10 +10,10 @@ export const environment = {
   },
   ai: {
     baseUrl: 'http://localhost:4000/api/ai',
-    marketSummary: '/ai/market-summary',
+    marketSummary: '/market-summary',
     // countryAnalysis: '/ai/country-analysis',
     // strategyEvaluation: '/ai/strategy-evaluation',
     // recommendations: '/ai/recommendations',
-    competitoranalysis: '/ai/competitorAnalysis',
+    competitoranalysis: '/competitorAnalysis',
   },
 };

@@ -15,6 +15,7 @@ import { UserService } from '../../services/user.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  showPassword = false;
   private fb = inject(FormBuilder);
   constructor(
     private userService: UserService,

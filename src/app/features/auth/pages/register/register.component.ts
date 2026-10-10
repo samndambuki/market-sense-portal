@@ -18,6 +18,7 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
+  showPassword = false;
 
   registerForm = this.fb.group(
     {
@@ -27,7 +28,7 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required]],
       role: ['', Validators.required],
     },
-    { validators: [this.passwordsMismatchValidator] }
+    { validators: [this.passwordsMismatchValidator] },
   );
 
   constructor(private userService: UserService) {}
@@ -66,7 +67,7 @@ export class RegisterComponent {
   }
 
   passwordsMismatchValidator(
-    control: AbstractControl
+    control: AbstractControl,
   ): { [key: string]: boolean } | null {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;

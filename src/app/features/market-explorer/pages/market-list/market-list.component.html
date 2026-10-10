@@ -128,12 +128,12 @@
         <span
           class="font-medium"
           [ngClass]="{
-            'text-green-700': market.metrics.riskLevel === 'Low',
-            'text-yellow-700': market.metrics.riskLevel === 'Medium',
-            'text-red-700': market.metrics.riskLevel === 'High',
+            'text-green-700': market.riskLevel === 'Low',
+            'text-yellow-700': market.riskLevel === 'Medium',
+            'text-red-700': market.riskLevel === 'High',
           }"
         >
-          {{ market.metrics.riskLevel }}
+          {{ market.riskLevel }}
         </span>
       </div>
       <div class="text-gray-600">
@@ -141,7 +141,7 @@
         <div class="flex flex-wrap gap-1">
           <span
             class="px-2 py-1 rounded bg-gray-100 text-xs"
-            *ngFor="let player of market.metrics.topPlayers"
+            *ngFor="let player of market.players"
           >
             {{ player }}
           </span>

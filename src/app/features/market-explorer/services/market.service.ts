@@ -30,12 +30,6 @@ export class MarketService {
     return this.http.get<Market>(`${API_ENDPOINTS.markets}/${id}`);
   }
   getMarketAIInsights(market: any): Observable<any> {
-    return this.http.post(API_ENDPOINTS.marketSummary, {
-      name: market.name,
-      category: market.category,
-      region: market.region,
-      description: market.description,
-      metrics: market.metrics,
-    });
+    return this.http.get(`${API_ENDPOINTS.marketSummary}/${market.id}`);
   }
 }

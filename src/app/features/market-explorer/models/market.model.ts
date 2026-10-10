@@ -5,9 +5,6 @@ export interface Market {
   region: string;
   description: string;
   growthRate: number;
-  metrics: {
-    marketSize: string;
-    topPlayers: string[];
-    riskLevel: 'Low' | 'Medium' | 'High';
-  };
+  riskLevel: string;
+  players: string[];
 }
