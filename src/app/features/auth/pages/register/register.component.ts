@@ -19,6 +19,7 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent {
   private fb = inject(FormBuilder);
   showPassword = false;
+  showConfirmPassword = false;
 
   registerForm = this.fb.group(
     {
