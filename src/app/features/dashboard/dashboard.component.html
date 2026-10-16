@@ -1,1 +1,35 @@
-<p>dashboard works!</p>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+  <!-- Chart 1 : Market Growth -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5 min-w-0">
+    <h2 class="text-lg font-semibold text-gray-800">Market Growth Rates</h2>
+    <p class="text-sm text-gray-500 mt-1">Compare growth Rates</p>
+
+    <div class="mt-4 h-80 w-full min-w-0">
+      <canvas
+        baseChart
+        [type]="barChartType"
+        [data]="barChartData"
+        [options]="barChartOptions"
+      >
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2 : Market Growth Comparison  -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5 min-w-0">
+    <h2 class="text-lg font-semibold text-gray-800">
+      Market Growth Comparison
+    </h2>
+    <p class="text-sm text-gray-500 mt-1">
+      View growth rates in a different format
+    </p>
+    <div class="mt-4 h-80 w-full min-w-0">
+      <canvas
+        baseChart
+        [type]="doughnutChartType"
+        [data]="doughnutChartData"
+        [options]="barChartOptions"
+      ></canvas>
+    </div>
+  </div>
+</div>
