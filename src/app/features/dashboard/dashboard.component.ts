@@ -4,12 +4,13 @@ import { Chart, registerables } from 'chart.js';
 import { RouterLink } from '@angular/router';
 import { Market } from '../market-explorer/models/market.model';
 import { MarketService } from '../market-explorer/services/market.service';
+import { CommonModule } from '@angular/common';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, BaseChartDirective],
+  imports: [RouterLink, BaseChartDirective, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -64,19 +65,29 @@ export class DashboardComponent implements OnInit {
     },
   };
 
+  doughnutChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top' as const,
+      },
+    },
+  };
+
   markets: Market[] = [];
   constructor(private marketService: MarketService) {}
   ngOnInit(): void {
-    this.marketService.loadMarkets();
-    const checkMarkets = setInterval(() => {
-      if (!this.marketService.loading) {
-        clearInterval(checkMarkets);
-      }
-      if (!this.marketService.error) {
-        this.markets = this.marketService.markets;
-      }
-      this.updateChart();
-    }, 100);
+    this.marketService.loadMarkets().subscribe({
+      next: (data) => {
+        this.markets = data;
+        this.updateChart();
+      },
+      error: (error) => {
+        console.error('Failed to load markets', error);
+      },
+    });
   }
 
   updateChart(): void {
@@ -109,5 +120,28 @@ export class DashboardComponent implements OnInit {
         },
       ],
     };
+  }
+
+  get totalMarkets(): number {
+    return this.markets.length;
+  }
+
+  get averageGrowth(): number {
+    if (this.markets.length === 0) return 0;
+    const total = this.markets.reduce(
+      (sum, market) => sum + market.growthRate,
+      0,
+    );
+    return total / this.markets.length;
+  }
+
+  get highRiskMarkets(): number {
+    return this.markets.filter(
+      (market) => market.riskLevel.toUpperCase() === 'HIGH',
+    ).length;
+  }
+
+  get totalCategories(): number {
+    return new Set(this.markets.map((market) => market.category)).size;
   }
 }

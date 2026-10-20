@@ -2,30 +2,26 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Market } from '../models/market.model';
 import { API_ENDPOINTS } from '../../../core/config/api-endpoints';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MarketService {
-  markets: Market[] = [];
   loading: boolean | string = false;
   error: boolean | null = null;
   constructor(private http: HttpClient) {}
-  loadMarkets() {
+
+  loadMarkets(): Observable<Market[]> {
     this.loading = true;
     this.error = null;
-    this.http.get<Market[]>(API_ENDPOINTS.markets).subscribe({
-      next: (data) => {
-        this.markets = data;
+    return this.http.get<Market[]>(API_ENDPOINTS.markets).pipe(
+      finalize(() => {
         this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-        this.error = true;
-      },
-    });
+      }),
+    );
   }
+
   getMarket(id: number) {
     return this.http.get<Market>(`${API_ENDPOINTS.markets}/${id}`);
   }

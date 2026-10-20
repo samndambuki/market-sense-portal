@@ -1,3 +1,38 @@
+<!-- dashboard summary cards  -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+  <!-- total markets  -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5">
+    <p class="text-sm text-gray-500">Total Markets</p>
+    <h2 class="text-3xl font-bold text-gray-900 mt-2">{{ totalMarkets }}</h2>
+    <p class="text-sm text-gray-500 mt-1">Markets tracked</p>
+  </div>
+  <!-- averageGrowth  -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5">
+    <p class="text-sm text-gray-500">Average Growth</p>
+    <h2 class="text-3xl font-bold text-green-600 mt-2">
+      {{ averageGrowth | number: "1.1-1" }}%
+    </h2>
+    <p class="text-sm text-gray-500 mt-1">Across all markets</p>
+  </div>
+  <!-- High-Risk Markets -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5">
+    <p class="text-sm text-gray-500">High-Risk Markets</p>
+    <h2 class="text-3xl font-bold text-red-600 mt-2">
+      {{ highRiskMarkets }}
+    </h2>
+    <p class="text-sm text-gray-500 mt-1">Require closer monitoring</p>
+  </div>
+
+  <!-- Categories -->
+  <div class="bg-white rounded-xl border border-gray-200 p-5">
+    <p class="text-sm text-gray-500">Market Categories</p>
+    <h2 class="text-3xl font-bold text-blue-600 mt-2">
+      {{ totalCategories }}
+    </h2>
+    <p class="text-sm text-gray-500 mt-1">Unique categories tracked</p>
+  </div>
+</div>
+
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
   <!-- Chart 1 : Market Growth -->
   <div class="bg-white rounded-xl border border-gray-200 p-5 min-w-0">
@@ -15,20 +50,20 @@
     </div>
   </div>
 
-  <!-- Chart 2 : Market Growth Comparison  -->
+  <!-- Chart 2 : Market Distribution  -->
   <div class="bg-white rounded-xl border border-gray-200 p-5 min-w-0">
     <h2 class="text-lg font-semibold text-gray-800">
-      Market Growth Comparison
+      Market Distribution per category
     </h2>
     <p class="text-sm text-gray-500 mt-1">
-      View growth rates in a different format
+      View the number of markets in each category
     </p>
     <div class="mt-4 h-80 w-full min-w-0">
       <canvas
         baseChart
         [type]="doughnutChartType"
         [data]="doughnutChartData"
-        [options]="barChartOptions"
+        [options]="doughnutChartOptions"
       ></canvas>
     </div>
   </div>

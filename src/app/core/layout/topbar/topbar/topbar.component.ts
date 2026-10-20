@@ -26,6 +26,8 @@ export class TopbarComponent {
 
   currentLang = this.languages[0];
 
+  currentUser = JSON.parse(localStorage.getItem('current_user') || '{}');
+
   constructor(
     private translate: TranslateService,
     private userService: UserService,

@@ -43,7 +43,7 @@ export class LoginComponent {
         localStorage.setItem('access_token', response.token);
         localStorage.setItem('current_user', JSON.stringify(response.user));
         alert('Login successful');
-        this.router.navigate(['/markets']);
+        this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Login error', error);

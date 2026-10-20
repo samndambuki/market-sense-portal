@@ -18,11 +18,19 @@ export class MarketListComponent implements OnInit {
   selectedGrowth = 'All';
 
   filteredMarkets: Market[] = [];
+  markets: Market[] = [];
 
   constructor(public marketService: MarketService) {}
 
   ngOnInit(): void {
-    this.marketService.loadMarkets();
+    this.marketService.loadMarkets().subscribe({
+      next: (data) => {
+        this.markets = data;
+      },
+      error: (error) => {
+        console.error('Error loading markets', error);
+      },
+    });
   }
 
   //angular checking in repeatedly - has anything important changed?
@@ -30,15 +38,15 @@ export class MarketListComponent implements OnInit {
   ngDoCheck(): void {
     if (
       !this.marketService.loading &&
-      this.marketService.markets.length &&
+      this.markets.length &&
       this.filteredMarkets.length === 0
     ) {
-      this.filteredMarkets = this.marketService.markets;
+      this.filteredMarkets = this.markets;
     }
   }
 
   applyFilters() {
-    this.filteredMarkets = this.marketService.markets.filter((market) => {
+    this.filteredMarkets = this.markets.filter((market) => {
       const matchesSearch = market.name
         .toLowerCase()
         .includes(this.searchTerm.toLowerCase());
