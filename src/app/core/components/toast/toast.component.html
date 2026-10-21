@@ -1,0 +1,29 @@
+<div
+  *ngIf="notification$ | async as notification"
+  class="fixed top-5 right-5 z-50 flex items-center gap-3 rounded-lg border px-4 py-3 shadow-lg"
+  [ngClass]="{
+    'border-green-200 bg-green-50 text-green-800':
+      notification.type === 'success',
+    'border-red-200 bg-red-50 text-red-800': notification.type === 'error',
+    'border-blue-200 bg-blue-50 text-blue-800': notification.type === 'info',
+  }"
+>
+  <span class="material-icons">
+    {{
+      notification.type === "success"
+        ? "check_circle"
+        : notification.type === "error"
+          ? "error"
+          : "info"
+    }}
+  </span>
+  <p class="text-sm font-medium">{{ notification.message }}</p>
+  <button
+    type="button"
+    (click)="close()"
+    class="ml-2 rounded p-1 hover:bg-black/5"
+    aria-label="Close notification"
+  >
+    <span class="material-icons text-lg">close</span>
+  </button>
+</div>

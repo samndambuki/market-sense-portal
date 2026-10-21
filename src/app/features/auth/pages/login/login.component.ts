@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private router: Router,
+    private notificationService: NotificationService,
   ) {}
 
   loginForm = this.fb.group({
@@ -42,13 +44,14 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('access_token', response.token);
         localStorage.setItem('current_user', JSON.stringify(response.user));
-        alert('Login successful');
+        this.notificationService.showSuccess('Login Successful. Welcome Back!');
         this.router.navigate(['/dashboard']);
       },
       error: (error) => {
         console.error('Login error', error);
-
-        alert(error.error?.message || 'Unable to log in. Please try again');
+        this.notificationService.showError(
+          'Login Failed. Please check your credentials and try again',
+        );
       },
     });
   }

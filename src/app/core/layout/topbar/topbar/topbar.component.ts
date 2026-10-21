@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../../features/auth/services/user.service';
 import { Route, Router } from '@angular/router';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-topbar',
@@ -32,6 +33,7 @@ export class TopbarComponent {
     private translate: TranslateService,
     private userService: UserService,
     private router: Router,
+    private notficationService: NotificationService,
   ) {
     const saved = localStorage.getItem('lang') || 'en';
     this.currentLang =
@@ -51,6 +53,7 @@ export class TopbarComponent {
   }
 
   logout() {
+    this.notficationService.showSuccess('You have logged out successfully');
     this.userService.logout();
     this.router.navigate(['/login']);
   }
