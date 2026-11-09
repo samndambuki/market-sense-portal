@@ -14,6 +14,6 @@ export const environment = {
     // countryAnalysis: '/ai/country-analysis',
     // strategyEvaluation: '/ai/strategy-evaluation',
     // recommendations: '/ai/recommendations',
-    competitoranalysis: '/competitor-analysis',
+    competitorAnalysis: '/competitor-analysis',
   },
 };

@@ -1,18 +1,14 @@
 export const environment = {
   production: true,
   api: {
-    baseUrl: 'https://api.marketsense.com',
+    baseUrl: 'https://txct1dng142t9m4k7jc.lambda-web.us-east-2.on.aws/api',
     markets: '/markets',
-    // strategies: '/strategies',
-    // countries: '/countries',
     marketPlayers: '/marketPlayers',
+    users: '/auth',
   },
   ai: {
-    baseUrl: 'https://ai.marketsense.com',
+    baseUrl: 'https://txct1dng142t9m4k7jc.lambda-web.us-east-2.on.aws/api/ai',
     marketSummary: '/market-summary',
-    // countryAnalysis: '/country-analysis',
-    // strategyEvaluation: '/strategy-evaluation',
-    // recommedations: '/recommedations',
-    competitorAnalysis: '/competitorAnalysis',
+    competitorAnalysis: '/competitor-analysis',
   },
 };

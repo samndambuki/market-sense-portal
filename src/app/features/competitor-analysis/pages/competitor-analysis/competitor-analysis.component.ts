@@ -62,7 +62,7 @@ export class CompetitorAnalysisComponent implements OnInit {
     this.analysis = '';
 
     this.http
-      .get<any>(API_ENDPOINTS.competitoranalysis, {
+      .get<any>(API_ENDPOINTS.competitorAnalysis, {
         params: { marketName: market.name },
       })
       .subscribe({
