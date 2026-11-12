@@ -1,3 +1,9 @@
+export interface MarketPlayer {
+  id: number;
+  companyName: string;
+  marketId: number;
+}
+
 export interface Market {
   id?: number;
   name: string;
@@ -5,6 +11,7 @@ export interface Market {
   region: string;
   description: string;
   growthRate: number;
-  riskLevel: string;
-  players: string[];
+  marketSize?: string;
+  riskLevel: 'LOW' | 'MEDIUM' | 'HIGH' | string;
+  players: MarketPlayer[];
 }

@@ -1,217 +1,343 @@
-<div class="min-h-screen bg-slate-100 grid grid-cols-1 lg:grid-cols-2">
-  <!-- LEFT BRANDING SECTION -->
-  <div
-    class="hidden lg:flex flex-col justify-center bg-blue-900 text-white p-12"
-  >
-    <div class="max-w-md">
-      <h1 class="text-4xl font-bold mb-4">MarketSense</h1>
+<div class="ms-auth">
+  <!-- LEFT: what MarketSense does, shown rather than listed -->
+  <aside class="ms-panel" aria-hidden="true">
+    <div class="ms-brand">
+      <span class="ms-mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect
+            x="1"
+            y="10"
+            width="3.5"
+            height="7"
+            rx="1"
+            fill="#fff"
+            fill-opacity=".55"
+          />
+          <rect
+            x="7.25"
+            y="6"
+            width="3.5"
+            height="11"
+            rx="1"
+            fill="#fff"
+            fill-opacity=".8"
+          />
+          <rect x="13.5" y="1" width="3.5" height="16" rx="1" fill="#fff" />
+        </svg>
+      </span>
+      MarketSense
+    </div>
 
-      <p class="text-lg text-blue-100 mb-8">
-        AI-powered market intelligence platform helping businesses discover
-        opportunities, analyze competitors and make smarter decisions.
+    <div>
+      <h1 class="ms-headline">Find the markets worth entering.</h1>
+      <p class="ms-lede">
+        Track growth, risk and the companies competing in each market, with AI
+        summaries your team can act on.
+      </p>
+    </div>
+
+    <figure class="ms-chart" style="margin: 0">
+      <svg viewBox="0 0 560 270" role="presentation">
+        <line class="ms-chart__grid" x1="0" y1="60" x2="400" y2="60" />
+        <line class="ms-chart__grid" x1="0" y1="130" x2="400" y2="130" />
+        <line class="ms-chart__grid" x1="0" y1="200" x2="400" y2="200" />
+
+        <path
+          class="ms-chart__line ms-chart__line--c"
+          pathLength="1"
+          stroke="rgba(255,255,255,.45)"
+          d="M0 250 C 80 248, 140 238, 200 228 S 300 202, 340 190 S 380 176, 400 170"
+        />
+        <path
+          class="ms-chart__line ms-chart__line--b"
+          pathLength="1"
+          stroke="#8FB3FF"
+          d="M0 242 C 70 238, 120 224, 170 208 S 260 172, 310 152 S 370 120, 400 110"
+        />
+        <path
+          class="ms-chart__line"
+          pathLength="1"
+          stroke="#3DDC97"
+          stroke-width="3"
+          d="M0 236 C 60 232, 100 210, 150 200 S 240 152, 290 122 S 360 72, 400 50"
+        />
+
+        <g class="ms-chart__end">
+          <circle cx="400" cy="50" r="5" fill="#3DDC97" />
+          <text class="ms-chart__name" x="416" y="44">
+            Fintech, East Africa
+          </text>
+          <text class="ms-chart__value" x="416" y="64" fill="#3DDC97">
+            +21.4%
+          </text>
+
+          <circle cx="400" cy="110" r="5" fill="#8FB3FF" />
+          <text class="ms-chart__name" x="416" y="104">Solar, West Africa</text>
+          <text class="ms-chart__value" x="416" y="124" fill="#8FB3FF">
+            +16.8%
+          </text>
+
+          <circle cx="400" cy="170" r="5" fill="rgba(255,255,255,.7)" />
+          <text class="ms-chart__name" x="416" y="164">Agritech, Kenya</text>
+          <text class="ms-chart__value" x="416" y="184" fill="#fff">
+            +11.2%
+          </text>
+        </g>
+      </svg>
+      <figcaption class="ms-note">Sample annual growth trends</figcaption>
+    </figure>
+  </aside>
+
+  <!-- RIGHT: the form -->
+  <main class="ms-main">
+    <div class="ms-form-wrap">
+      <div class="ms-brand ms-mobile-brand">
+        <span class="ms-mark">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              x="1"
+              y="10"
+              width="3.5"
+              height="7"
+              rx="1"
+              fill="#fff"
+              fill-opacity=".55"
+            />
+            <rect
+              x="7.25"
+              y="6"
+              width="3.5"
+              height="11"
+              rx="1"
+              fill="#fff"
+              fill-opacity=".8"
+            />
+            <rect x="13.5" y="1" width="3.5" height="16" rx="1" fill="#fff" />
+          </svg>
+        </span>
+        MarketSense
+      </div>
+
+      <h2 class="ms-title">Create your account</h2>
+      <p class="ms-subtitle">
+        It takes under a minute. You can start exploring markets straight away.
       </p>
 
-      <div class="space-y-4">
-        <div class="flex items-center gap-3">
-          <span class="material-icons">insights</span>
-          <span>Market Intelligence</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <span class="material-icons">analytics</span>
-          <span>Competitor Analysis</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <span class="material-icons">psychology</span>
-          <span>AI-Powered Insights</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RIGHT FORM SECTION -->
-  <div class="flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-      <div class="mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Create Account</h2>
-
-        <p class="text-gray-500 mt-2">
-          Join MarketSense and start exploring market opportunities.
-        </p>
-      </div>
-
-      <!-- FORM -->
       <form
-        class="space-y-5"
+        class="ms-form"
         [formGroup]="registerForm"
         (ngSubmit)="register()"
+        novalidate
       >
         <!-- FULL NAME -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Full Name
-          </label>
-
+          <label class="ms-label" for="fullName">Full name</label>
           <input
+            id="fullName"
             type="text"
             formControlName="fullName"
-            placeholder="John Doe"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+            autocomplete="name"
+            placeholder="Amina Otieno"
+            class="ms-input"
+            [class.ms-input--error]="
+              registerForm.controls['fullName'].touched &&
+              registerForm.controls['fullName'].invalid
+            "
           />
           @if (
             registerForm.controls["fullName"].touched &&
             registerForm.controls["fullName"].hasError("required")
           ) {
-            <p class="text-red-500 text-sm mt-1">FullName is required</p>
+            <p class="ms-hint ms-hint--error" role="alert">
+              <span class="material-icons">error_outline</span>
+              Enter your full name.
+            </p>
           }
         </div>
 
         <!-- EMAIL -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Email Address
-          </label>
-
+          <label class="ms-label" for="email">Work email</label>
           <input
+            id="email"
             type="email"
             formControlName="email"
-            placeholder="john@example.com"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+            autocomplete="email"
+            placeholder="amina@company.com"
+            class="ms-input"
+            [class.ms-input--error]="
+              registerForm.controls.email.touched &&
+              registerForm.controls.email.invalid
+            "
           />
           @if (
             registerForm.controls.email.touched &&
             registerForm.controls.email.invalid
           ) {
-            <p class="text-red-500 text-sm mt-1">
-              Please enter a valid email address
+            <p class="ms-hint ms-hint--error" role="alert">
+              <span class="material-icons">error_outline</span>
+              Enter a valid email, like name&#64;company.com.
             </p>
-          }
-        </div>
-
-        <!-- ROLE -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Role
-          </label>
-
-          <select
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500 cursor-pointer"
-            formControlName="role"
-          >
-            <option value="">Select Role</option>
-            <option value="ADMIN">Admin</option>
-            <option value="ANALYST">Analyst</option>
-            <option value="VIEWER">Viewer</option>
-          </select>
-          @if (
-            registerForm.controls["role"]?.touched &&
-            registerForm.controls["role"].hasError("required")
-          ) {
-            <p class="text-red-500 text-sm mt-1">Role is required</p>
           }
         </div>
 
         <!-- PASSWORD -->
         <div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
-          </div>
-          <div class="relative">
+          <label class="ms-label" for="password">Password</label>
+          <div class="ms-input-wrap">
             <input
+              id="password"
               [type]="showPassword ? 'text' : 'password'"
               formControlName="password"
-              placeholder="********"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+              autocomplete="new-password"
+              placeholder="Create a password"
+              class="ms-input ms-input--has-toggle"
+              [class.ms-input--error]="
+                registerForm.controls['password'].touched &&
+                registerForm.controls['password'].invalid
+              "
+              aria-describedby="password-strength"
             />
-            @if (
-              registerForm.controls["password"].touched &&
-              registerForm.controls["password"].hasError("required")
-            ) {
-              <p class="text-red-500 text-sm mt-1">Password is required</p>
-            }
-            @if (
-              registerForm.controls["password"].touched &&
-              registerForm.controls["password"].hasError("minlength")
-            ) {
-              <p class="text-red-500 text-sm mt-1">
-                Password must be atleast 6 characters long
-              </p>
-            }
             <button
               type="button"
+              class="ms-toggle"
               (click)="showPassword = !showPassword"
-              class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 hover:text-blue-600 transition focus:outline-none focus:text-blue-600 cursor-pointer"
+              [attr.aria-label]="
+                showPassword ? 'Hide password' : 'Show password'
+              "
             >
               <span class="material-icons">
                 {{ showPassword ? "visibility_off" : "visibility" }}
               </span>
             </button>
           </div>
+
+          @if (
+            registerForm.controls["password"].touched &&
+            registerForm.controls["password"].hasError("required")
+          ) {
+            <p class="ms-hint ms-hint--error" role="alert">
+              <span class="material-icons">error_outline</span>
+              Create a password to continue.
+            </p>
+          }
+
+          @if (passwordValue) {
+            <div
+              id="password-strength"
+              class="ms-strength"
+              [attr.data-level]="passwordStrength"
+              aria-live="polite"
+            >
+              <div class="ms-strength__bar">
+                <span class="ms-strength__seg"></span>
+                <span class="ms-strength__seg"></span>
+                <span class="ms-strength__seg"></span>
+                <span class="ms-strength__seg"></span>
+              </div>
+              <p class="ms-strength__label">
+                Strength: <strong>{{ strengthLabel }}</strong>
+              </p>
+              <ul class="ms-checks">
+                @for (check of passwordChecks; track check.label) {
+                  <li [class.is-met]="check.met">
+                    <span class="material-icons">
+                      {{
+                        check.met ? "check_circle" : "radio_button_unchecked"
+                      }}
+                    </span>
+                    {{ check.label }}
+                  </li>
+                }
+              </ul>
+            </div>
+          }
         </div>
 
         <!-- CONFIRM PASSWORD -->
         <div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Confirm Password
-            </label>
-          </div>
-
-          <div class="relative">
+          <label class="ms-label" for="confirmPassword">Confirm password</label>
+          <div class="ms-input-wrap">
             <input
+              id="confirmPassword"
               [type]="showConfirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
-              placeholder="********"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+              autocomplete="new-password"
+              placeholder="Type it again"
+              class="ms-input ms-input--has-toggle"
+              [class.ms-input--error]="
+                registerForm.controls['confirmPassword'].touched &&
+                (registerForm.controls['confirmPassword'].invalid ||
+                  registerForm.hasError('passwordMismatch'))
+              "
             />
-            @if (
-              registerForm.controls["confirmPassword"].touched &&
-              registerForm.controls["confirmPassword"].hasError("required")
-            ) {
-              <p class="text-red-500 text-sm mt-1">
-                Kindly confirm your password
-              </p>
-            }
-            @if (
-              registerForm.hasError("passwordMismatch") && registerForm.touched
-            ) {
-              <p class="text-red-500 text-sm mt-1">Passwords do not match</p>
-            }
             <button
               type="button"
+              class="ms-toggle"
               (click)="showConfirmPassword = !showConfirmPassword"
-              class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 hover:text-blue-600 transition focus:outline-none focus:text-blue-600 cursor-pointer"
+              [attr.aria-label]="
+                showConfirmPassword ? 'Hide password' : 'Show password'
+              "
             >
               <span class="material-icons">
                 {{ showConfirmPassword ? "visibility_off" : "visibility" }}
               </span>
             </button>
           </div>
+
+          @if (
+            registerForm.controls["confirmPassword"].touched &&
+            registerForm.controls["confirmPassword"].hasError("required")
+          ) {
+            <p class="ms-hint ms-hint--error" role="alert">
+              <span class="material-icons">error_outline</span>
+              Type your password again.
+            </p>
+          } @else if (
+            registerForm.controls["confirmPassword"].value &&
+            registerForm.hasError("passwordMismatch")
+          ) {
+            <p class="ms-hint ms-hint--error" role="alert">
+              <span class="material-icons">error_outline</span>
+              Passwords don't match yet.
+            </p>
+          } @else if (registerForm.controls["confirmPassword"].value) {
+            <p class="ms-hint ms-hint--ok">
+              <span class="material-icons">check_circle</span>
+              Passwords match.
+            </p>
+          }
         </div>
 
-        <!-- BUTTON -->
-        <button
-          type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition cursor-pointer"
-        >
-          Create Account
+        <!-- ACCESS NOTE (replaces the old role dropdown) -->
+        <div class="ms-access">
+          <span class="material-icons" aria-hidden="true">shield</span>
+          <p>
+            New accounts start with view access. An admin can give you analyst
+            or admin rights later.
+          </p>
+        </div>
+
+        <button type="submit" class="ms-submit" [disabled]="isSubmitting">
+          @if (isSubmitting) {
+            <span class="ms-spinner" aria-hidden="true"></span>
+            Creating account…
+          } @else {
+            Create account
+          }
         </button>
       </form>
 
-      <!-- LOGIN LINK -->
-      <div class="mt-6 text-center">
-        <span class="text-gray-500"> Already have an account? </span>
-
-        <a
-          routerLink="/login"
-          class="text-blue-600 hover:text-blue-800 font-medium ml-1 cursor-pointer"
-        >
-          Sign In
-        </a>
-      </div>
+      <p class="ms-switch">
+        Already have an account?
+        <a routerLink="/login">Sign in</a>
+      </p>
     </div>
-  </div>
+  </main>
 </div>

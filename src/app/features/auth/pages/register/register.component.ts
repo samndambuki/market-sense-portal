@@ -34,11 +34,39 @@ export class RegisterComponent {
 
   constructor(private userService: UserService) {}
 
+  isSubmitting = false;
+
+  get passwordValue(): string {
+    return this.registerForm.controls['password'].value ?? '';
+  }
+
+  get passwordChecks(): { label: string; met: boolean }[] {
+    const v = this.passwordValue;
+    return [
+      { label: 'At least 6 characters', met: v.length >= 6 },
+      { label: 'One uppercase letter', met: /[A-Z]/.test(v) },
+      { label: 'One number', met: /\d/.test(v) },
+      { label: 'One symbol', met: /[^A-Za-z0-9]/.test(v) },
+    ];
+  }
+
+  get passwordStrength(): number {
+    return this.passwordChecks.filter((c) => c.met).length;
+  }
+
+  get strengthLabel(): string {
+    return ['Too weak', 'Weak', 'Fair', 'Good', 'Strong'][
+      this.passwordStrength
+    ];
+  }
+
   register() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
+
+    this.isSubmitting = true;
 
     const password = this.registerForm.value.password!;
     const confirmPassword = this.registerForm.value.confirmPassword!;
@@ -56,12 +84,14 @@ export class RegisterComponent {
 
     this.userService.register(user).subscribe({
       next: (response) => {
+        this.isSubmitting = false;
         console.log('response', response);
         alert('user created successfully');
         console.log('user created');
         this.registerForm.reset();
       },
       error: (error) => {
+        this.isSubmitting = false;
         console.error(error);
       },
     });

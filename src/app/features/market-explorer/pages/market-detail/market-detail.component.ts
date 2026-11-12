@@ -1,57 +1,83 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MarketService } from '../../services/market.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { marked } from 'marked';
+import { Market } from '../../models/market.model';
+import { MarketService } from '../../services/market.service';
 
 @Component({
   selector: 'app-market-detail',
-  imports: [CommonModule, RouterLink],
+  imports: [RouterLink],
   templateUrl: './market-detail.component.html',
   styleUrl: './market-detail.component.scss',
 })
 export class MarketDetailComponent implements OnInit {
-  market: any = null;
-  insights: string | null = null;
-  loadingAI = false;
-  errorAI = false;
+  private marketService = inject(MarketService);
+  private route = inject(ActivatedRoute);
 
-  constructor(
-    private http: HttpClient,
-    private marketService: MarketService,
-    private route: ActivatedRoute,
-  ) {}
+  private marketId = 0;
+
+  market: Market | null = null;
+  isLoadingMarket = true;
+  marketError: 'not-found' | 'failed' | null = null;
+
+  insightsHtml = '';
+  isLoadingInsights = false;
+  insightsError = false;
 
   ngOnInit(): void {
-    this.getMarket();
+    this.marketId = Number(this.route.snapshot.paramMap.get('id'));
+    // Both requests only need the id, so run them at the same time
+    this.loadMarket();
+    this.loadInsights();
   }
 
-  getMarket() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.marketService.getMarket(id).subscribe({
+  loadMarket(): void {
+    this.isLoadingMarket = true;
+    this.marketError = null;
+
+    this.marketService.getMarket(this.marketId).subscribe({
       next: (data) => {
         this.market = data;
-        console.log('this.market', this.market);
-        this.loadAIInsights();
+        this.isLoadingMarket = false;
       },
-      error: () => {
-        this.errorAI = true;
+      error: (error: HttpErrorResponse) => {
+        console.error('Failed to load market', error);
+        this.isLoadingMarket = false;
+        this.marketError =
+          error.status === 404 || error.status === 400 ? 'not-found' : 'failed';
       },
     });
   }
 
-  loadAIInsights() {
-    if (!this.market) return;
-    this.loadingAI = true;
-    this.marketService.getMarketAIInsights(this.market).subscribe({
+  loadInsights(): void {
+    this.isLoadingInsights = true;
+    this.insightsError = false;
+
+    this.marketService.getMarketAIInsights({ id: this.marketId }).subscribe({
       next: (res) => {
-        this.insights = res.analysis || res.text || JSON.stringify(res);
-        this.loadingAI = false;
+        const text: string = res?.analysis ?? res?.text ?? '';
+        // The AI replies in Markdown (## headings, - bullets, **bold**).
+        // Angular sanitises [innerHTML], so the generated HTML is safe to show.
+        this.insightsHtml = marked.parse(text, { async: false }) as string;
+        this.isLoadingInsights = false;
       },
-      error: () => {
-        this.errorAI = true;
-        this.loadingAI = false;
+      error: (error) => {
+        console.error('Failed to load AI insights', error);
+        this.insightsError = true;
+        this.isLoadingInsights = false;
       },
     });
+  }
+
+  growthLevel(rate: number): 'High' | 'Medium' | 'Low' {
+    return rate >= 15 ? 'High' : rate >= 10 ? 'Medium' : 'Low';
+  }
+
+  /** "HIGH" -> "High" */
+  riskLabel(risk: string): string {
+    return risk
+      ? risk.charAt(0).toUpperCase() + risk.slice(1).toLowerCase()
+      : '';
   }
 }

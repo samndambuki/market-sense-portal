@@ -1,65 +1,154 @@
-<div class="max-w-4xl mx-auto">
-  <!-- header  -->
-  <div class="mb-6">
-    <h1 class="text-lg font-semibold text-gray-900">Competitor Analysis</h1>
-    <p>Analyze competitor and market positioning using AI</p>
+<div class="ca">
+  <!-- HEADER -->
+  <div class="mb-5">
+    <h1 class="ca-title">Competitor analysis</h1>
+    <p class="mt-1 text-[13px] text-slate-500">
+      Pick a market to see who it's up against and where the openings are.
+    </p>
   </div>
 
-  <!-- input card  -->
-  <div class="bg-white shadow-sm border border-gray-200 rounded-xl p-5 mb-6">
-    <div class="flex flex-col sm:flex-row gap-3">
-      <!-- select -->
-      <select
-        [(ngModel)]="selectedMarket"
-        [disabled]="loadingMarkets || loading"
-        class="w-full border border-gray-300 rounded-md px-4 py-3 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 cursor-pointer"
+  <!-- PICKER -->
+  <section class="ca-panel">
+    <label for="market" class="block text-[12.5px] font-semibold text-slate-800"
+      >Market</label
+    >
+
+    @if (marketsError) {
+      <div
+        class="mt-2 flex items-center justify-between gap-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5"
       >
-        <option class="cursor-pointer" value="" disabled>
-          {{ loadingMarkets ? "Loading markets..." : "Select a market" }}
-        </option>
+        <p class="text-[12.5px] text-red-800">Couldn't load your markets.</p>
+        <button
+          type="button"
+          class="ca-btn ca-btn--ghost"
+          (click)="getMarkets()"
+        >
+          Try again
+        </button>
+      </div>
+    } @else {
+      <div class="mt-1.5 flex flex-col gap-2 sm:flex-row">
+        <div class="relative flex-1">
+          <select
+            id="market"
+            [(ngModel)]="selectedMarketId"
+            [disabled]="loadingMarkets || loading"
+            class="ca-field"
+          >
+            <option [ngValue]="null" disabled>
+              {{ loadingMarkets ? "Loading markets…" : "Select a market" }}
+            </option>
+            @for (market of markets; track market.id) {
+              <option [ngValue]="market.id">{{ market.name }}</option>
+            }
+          </select>
+          <span class="material-icons ca-chevron" aria-hidden="true"
+            >expand_more</span
+          >
+        </div>
 
-        <option *ngFor="let market of markets" [value]="market.name">
-          {{ market.name }}
-        </option>
-      </select>
-    </div>
-    <button
-      [disabled]="loading"
-      (click)="analyze()"
-      class="bg-blue-600 hover:blue-700 text-white text-sm font-medium px-5 py-2 rounded-md transition disabled:opacity-50 mt-4 cursor-pointer"
-    >
-      Analyze
-    </button>
-    <div *ngIf="error" class="mt-3 text-sm text-red-600">
-      {{ error }}
-    </div>
-  </div>
-  <!-- loading  -->
-  <div
-    *ngIf="loading"
-    class="bg-white border border-gray-200 rounded-xl p-5 animate-pulse"
-  >
-    <div class="h-4 bg-gray-200 rounded w-1/3 mb-4"></div>
-    <div class="h-3 bg-gray-200 rounded mb-2"></div>
-    <div class="h-3 bg-gray-200 rounded mb-2"></div>
-    <div class="h-3 bg-gray-200 rounded w-5/6"></div>
-  </div>
+        <button
+          type="button"
+          class="ca-btn"
+          [disabled]="!selectedMarketId || loading"
+          (click)="analyze()"
+        >
+          @if (loading) {
+            <span class="ca-spinner" aria-hidden="true"></span>
+            Analysing…
+          } @else {
+            <span class="material-icons text-base" aria-hidden="true"
+              >auto_awesome</span
+            >
+            Analyse competitors
+          }
+        </button>
+      </div>
 
-  <!-- result  -->
-  <div
-    *ngIf="analysis && !loading"
-    class="bg-white shadow-sm border border-gray-200 rounded-xl p-6"
-  >
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-800">
-        AI Competitor Insights
-      </h3>
-    </div>
-    <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full"
-      >AI generated</span
-    >
-    <div class="text-sm text-gray-600 leading-relaxed whitespace-pre-line mt-4">
-      {{ analysis }}
-    </div>
-  </div>
+      <!-- quick context for the chosen market -->
+      @if (selectedMarket) {
+        <p class="mt-2.5 text-[12px] text-slate-500">
+          {{ selectedMarket.category }}, {{ selectedMarket.region }}.
+          {{ selectedMarket.growthRate }}% growth,
+          {{ selectedMarket.players.length }}
+          {{ selectedMarket.players.length === 1 ? "company" : "companies" }} on
+          file
+        </p>
+      }
+    }
+  </section>
+
+  <!-- RESULT AREA -->
+  <section class="ca-panel mt-4" aria-live="polite">
+    @if (loading) {
+      <p class="mb-3 flex items-center gap-2 text-xs text-slate-500">
+        <span class="ca-spinner ca-spinner--blue" aria-hidden="true"></span>
+        Analysing {{ analysedMarket?.name }}… this can take a few seconds.
+      </p>
+      <div class="space-y-2.5">
+        <div class="ca-skel h-3 w-1/3"></div>
+        <div class="ca-skel h-3 w-full"></div>
+        <div class="ca-skel h-3 w-11/12"></div>
+        <div class="ca-skel mt-5 h-3 w-1/4"></div>
+        <div class="ca-skel h-3 w-10/12"></div>
+        <div class="ca-skel h-3 w-3/4"></div>
+      </div>
+    } @else if (error) {
+      <div
+        class="flex flex-col items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-3.5 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p class="text-[13px] text-red-800">{{ error }}</p>
+        <button type="button" class="ca-btn ca-btn--ghost" (click)="analyze()">
+          Try again
+        </button>
+      </div>
+    } @else if (analysisHtml && analysedMarket) {
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="ca-ai-icon material-icons" aria-hidden="true"
+            >auto_awesome</span
+          >
+          <div>
+            <h2 class="text-sm font-semibold text-slate-900">
+              Competitive landscape:
+              <a
+                [routerLink]="['/markets', analysedMarket.id]"
+                class="text-[#2F5BEA] hover:underline"
+              >
+                {{ analysedMarket.name }}
+              </a>
+            </h2>
+            <p class="text-[11.5px] text-slate-500">
+              Written by AI. Check important details before acting on them.
+            </p>
+          </div>
+        </div>
+        <button type="button" class="ca-btn ca-btn--quiet" (click)="analyze()">
+          <span class="material-icons text-base" aria-hidden="true"
+            >refresh</span
+          >
+          Regenerate
+        </button>
+      </div>
+      <div class="ca-prose mt-4" [innerHTML]="analysisHtml"></div>
+    } @else {
+      <!-- before the first analysis: say what they'll get -->
+      <div class="py-6 text-center">
+        <span class="material-icons text-3xl text-slate-300" aria-hidden="true"
+          >insights</span
+        >
+        <p class="mt-2 text-sm font-semibold text-slate-900">
+          Your analysis will appear here
+        </p>
+        <p class="mt-1 text-xs text-slate-500">
+          Choose a market above. The report covers:
+        </p>
+        <ul class="mx-auto mt-3 flex max-w-md flex-wrap justify-center gap-1.5">
+          @for (section of sections; track section) {
+            <li class="ca-chip">{{ section }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </section>
 </div>

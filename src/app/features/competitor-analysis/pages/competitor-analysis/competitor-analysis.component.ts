@@ -1,79 +1,97 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { API_ENDPOINTS } from '../../../../core/config/api-endpoints';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { marked } from 'marked';
+import { API_ENDPOINTS } from '../../../../core/config/api-endpoints';
+import { Market } from '../../../market-explorer/models/market.model';
+import { MarketService } from '../../../market-explorer/services/market.service';
 
 @Component({
   selector: 'app-competitor-analysis',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './competitor-analysis.component.html',
   styleUrl: './competitor-analysis.component.scss',
 })
 export class CompetitorAnalysisComponent implements OnInit {
-  market: string = '';
-  selectedMarket = '';
-  loadingMarkets: boolean = false;
-  markets: any;
-  analysis: string = '';
-  loading: boolean = false;
+  private http = inject(HttpClient);
+  private marketService = inject(MarketService);
+
+  markets: Market[] = [];
+  loadingMarkets = false;
+  marketsError = false;
+
+  selectedMarketId: number | null = null;
+
+  /** The market the current result belongs to (stays put if the user picks another one) */
+  analysedMarket: Market | null = null;
+  analysisHtml = '';
+  loading = false;
   error = '';
 
-  constructor(private http: HttpClient) {}
+  /** What the AI covers, shown before the first analysis */
+  readonly sections = [
+    'Major competitors',
+    'Competitive advantages',
+    'Market positioning',
+    'Emerging opportunities',
+    'Competitive risks',
+  ];
 
   ngOnInit(): void {
     this.getMarkets();
   }
 
-  getMarkets() {
+  get selectedMarket(): Market | undefined {
+    return this.markets.find((m) => m.id === this.selectedMarketId);
+  }
+
+  getMarkets(): void {
     this.loadingMarkets = true;
-    this.error = '';
-    this.http.get<any>(API_ENDPOINTS.markets).subscribe({
+    this.marketsError = false;
+
+    this.marketService.loadMarkets().subscribe({
       next: (markets) => {
-        this.markets = markets;
+        this.markets = [...markets].sort((a, b) =>
+          a.name.localeCompare(b.name),
+        );
         this.loadingMarkets = false;
-        console.log('markets', this.markets);
       },
       error: (error) => {
         console.error('Failed to load markets', error);
-        this.error = 'Failed to load markets. Please try again';
+        this.marketsError = true;
         this.loadingMarkets = false;
       },
     });
   }
 
-  analyze() {
-    if (!this.selectedMarket) {
-      this.error = 'Please select a market';
-      return;
-    }
-
-    const market = this.markets.find(
-      (item: any) => item.name === this.selectedMarket,
-    );
-
-    if (!market) {
-      this.error = 'Selected Market could not be found';
-      return;
-    }
+  analyze(): void {
+    const market = this.selectedMarket;
+    if (!market) return;
 
     this.loading = true;
     this.error = '';
-    this.analysis = '';
+    this.analysisHtml = '';
+    this.analysedMarket = market;
 
     this.http
-      .get<any>(API_ENDPOINTS.competitorAnalysis, {
+      .get<{ analysis: string }>(API_ENDPOINTS.competitorAnalysis, {
         params: { marketName: market.name },
       })
       .subscribe({
         next: (res) => {
-          this.analysis = res.analysis;
+          // The AI replies in Markdown; Angular sanitises [innerHTML]
+          this.analysisHtml = marked.parse(res.analysis ?? '', {
+            async: false,
+          }) as string;
           this.loading = false;
         },
-        error: (err) => {
-          console.error('Competitor Analysis failed', err);
+        error: (err: HttpErrorResponse) => {
+          console.error('Competitor analysis failed', err);
           this.error =
-            err.error?.message || 'Failed to generate competitor analysis';
+            err.status === 0
+              ? 'Can’t reach the server. Check your connection and try again.'
+              : 'Couldn’t generate the analysis. The AI service may be busy. Try again.';
           this.loading = false;
         },
       });

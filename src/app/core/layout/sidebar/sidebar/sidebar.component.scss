@@ -1,0 +1,131 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+  font-family: "Instrument Sans", system-ui, sans-serif;
+}
+
+.sb {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100%;
+  background: #0b1f4d;
+  color: #fff;
+  transition: width 0.2s ease;
+}
+
+.sb--collapsed {
+  width: 56px;
+}
+
+/* brand */
+
+.sb-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sb-mark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: #2f5bea;
+}
+
+.sb-brand-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* nav */
+
+.sb-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 8px;
+}
+
+.sb-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.sb--collapsed .sb-link {
+  justify-content: center;
+  padding: 0;
+}
+
+.sb-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.sb-link:focus-visible {
+  outline: 2px solid #8fb3ff;
+  outline-offset: 1px;
+}
+
+.sb-link--active,
+.sb-link--active:hover {
+  background: rgba(143, 179, 255, 0.16);
+  color: #fff;
+}
+
+/* small bar on the left of the current page */
+.sb-link--active::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 7px;
+  bottom: 7px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #8fb3ff;
+}
+
+.sb-icon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.sb-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sb {
+    transition: none;
+  }
+}

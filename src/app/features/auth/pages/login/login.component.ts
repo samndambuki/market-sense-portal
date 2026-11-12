@@ -1,57 +1,71 @@
-import { Component, inject, Inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormsModule,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule, ReactiveFormsModule],
+  imports: [RouterModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  showPassword = false;
   private fb = inject(FormBuilder);
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private notificationService: NotificationService,
-  ) {}
+  private userService = inject(UserService);
+  private router = inject(Router);
+  private notificationService = inject(NotificationService);
 
-  loginForm = this.fb.group({
+  showPassword = false;
+  isSubmitting = false;
+  loginError = '';
+
+  loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
 
-  login() {
+  constructor() {
+    // Hide the sign-in error as soon as the user starts correcting it
+    this.loginForm.valueChanges.subscribe(() => {
+      if (this.loginError) this.loginError = '';
+    });
+  }
+
+  login(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const credentials = {
-      email: this.loginForm.value.email!,
-      password: this.loginForm.value.password!,
-    };
+    this.isSubmitting = true;
+    this.loginError = '';
+
+    const credentials = this.loginForm.getRawValue();
 
     this.userService.login(credentials).subscribe({
       next: (response) => {
         localStorage.setItem('access_token', response.token);
         localStorage.setItem('current_user', JSON.stringify(response.user));
-        this.notificationService.showSuccess('Login Successful. Welcome Back!');
+        this.isSubmitting = false;
+        this.notificationService.showSuccess('Welcome back!');
         this.router.navigate(['/dashboard']);
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         console.error('Login error', error);
-        this.notificationService.showError(
-          'Login Failed. Please check your credentials and try again',
-        );
+        this.isSubmitting = false;
+
+        if (error.status === 401) {
+          this.loginError =
+            'That email and password don’t match. Check them and try again.';
+        } else if (error.status === 0) {
+          this.loginError =
+            'Can’t reach the server. Check your internet connection and try again.';
+        } else {
+          this.loginError =
+            'Something went wrong on our side. Try again in a moment.';
+        }
       },
     });
   }

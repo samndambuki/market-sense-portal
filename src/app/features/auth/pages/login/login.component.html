@@ -1,148 +1,229 @@
-<div class="min-h-screen bg-slate-100 grid grid-cols-1 lg:grid-cols-2">
-  <!-- LEFT BRANDING SECTION -->
-  <div
-    class="hidden lg:flex flex-col justify-center bg-blue-900 text-white p-12"
-  >
-    <div class="max-w-md">
-      <h1 class="text-4xl font-bold mb-4">MarketSense</h1>
-
-      <p class="text-lg text-blue-100 mb-8">
-        AI-powered market intelligence platform helping businesses discover
-        opportunities, analyze competitors and make smarter decisions.
-      </p>
-
-      <div class="space-y-4">
-        <div class="flex items-center gap-3">
-          <span class="material-icons">insights</span>
-          <span>Market Intelligence</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <span class="material-icons">analytics</span>
-          <span>Competitor Analysis</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <span class="material-icons">psychology</span>
-          <span>AI-Powered Insights</span>
-        </div>
-      </div>
+<div class="ms-auth">
+  <!-- LEFT: same panel as Create Account -->
+  <aside class="ms-panel" aria-hidden="true">
+    <div class="ms-brand">
+      <span class="ms-mark">
+        <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+          <rect
+            x="1"
+            y="10"
+            width="3.5"
+            height="7"
+            rx="1"
+            fill="#fff"
+            fill-opacity=".55"
+          />
+          <rect
+            x="7.25"
+            y="6"
+            width="3.5"
+            height="11"
+            rx="1"
+            fill="#fff"
+            fill-opacity=".8"
+          />
+          <rect x="13.5" y="1" width="3.5" height="16" rx="1" fill="#fff" />
+        </svg>
+      </span>
+      MarketSense
     </div>
-  </div>
 
-  <!-- LOGIN FORM -->
-  <div class="flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-      <!-- HEADER -->
-      <div class="mb-8">
-        <h2 class="text-3xl font-bold text-gray-900">Welcome Back</h2>
+    <div>
+      <h1 class="ms-headline">Pick up where your research left off.</h1>
+      <p class="ms-lede">
+        Your markets, competitor notes and AI summaries are right where you
+        saved them.
+      </p>
+    </div>
 
-        <p class="text-gray-500 mt-2">Sign in to continue to MarketSense.</p>
+    <figure class="ms-chart" style="margin: 0">
+      <svg viewBox="0 0 560 270" role="presentation">
+        <line class="ms-chart__grid" x1="0" y1="60" x2="400" y2="60" />
+        <line class="ms-chart__grid" x1="0" y1="130" x2="400" y2="130" />
+        <line class="ms-chart__grid" x1="0" y1="200" x2="400" y2="200" />
+
+        <path
+          class="ms-chart__line ms-chart__line--c"
+          pathLength="1"
+          stroke="rgba(255,255,255,.45)"
+          d="M0 250 C 80 248, 140 238, 200 228 S 300 202, 340 190 S 380 176, 400 170"
+        />
+        <path
+          class="ms-chart__line ms-chart__line--b"
+          pathLength="1"
+          stroke="#8FB3FF"
+          d="M0 242 C 70 238, 120 224, 170 208 S 260 172, 310 152 S 370 120, 400 110"
+        />
+        <path
+          class="ms-chart__line"
+          pathLength="1"
+          stroke="#3DDC97"
+          stroke-width="3"
+          d="M0 236 C 60 232, 100 210, 150 200 S 240 152, 290 122 S 360 72, 400 50"
+        />
+
+        <g class="ms-chart__end">
+          <circle cx="400" cy="50" r="5" fill="#3DDC97" />
+          <text class="ms-chart__name" x="416" y="44">
+            Fintech, East Africa
+          </text>
+          <text class="ms-chart__value" x="416" y="64" fill="#3DDC97">
+            +21.4%
+          </text>
+
+          <circle cx="400" cy="110" r="5" fill="#8FB3FF" />
+          <text class="ms-chart__name" x="416" y="104">Solar, West Africa</text>
+          <text class="ms-chart__value" x="416" y="124" fill="#8FB3FF">
+            +16.8%
+          </text>
+
+          <circle cx="400" cy="170" r="5" fill="rgba(255,255,255,.7)" />
+          <text class="ms-chart__name" x="416" y="164">Agritech, Kenya</text>
+          <text class="ms-chart__value" x="416" y="184" fill="#fff">
+            +11.2%
+          </text>
+        </g>
+      </svg>
+      <figcaption class="ms-note">Sample annual growth trends</figcaption>
+    </figure>
+  </aside>
+
+  <!-- RIGHT: sign-in form -->
+  <main class="ms-main">
+    <div class="ms-form-wrap">
+      <div class="ms-brand ms-mobile-brand">
+        <span class="ms-mark">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 18 18"
+            fill="none"
+            aria-hidden="true"
+          >
+            <rect
+              x="1"
+              y="10"
+              width="3.5"
+              height="7"
+              rx="1"
+              fill="#fff"
+              fill-opacity=".55"
+            />
+            <rect
+              x="7.25"
+              y="6"
+              width="3.5"
+              height="11"
+              rx="1"
+              fill="#fff"
+              fill-opacity=".8"
+            />
+            <rect x="13.5" y="1" width="3.5" height="16" rx="1" fill="#fff" />
+          </svg>
+        </span>
+        MarketSense
       </div>
 
-      <!-- FORM -->
-      <form class="space-y-5" [formGroup]="loginForm" (ngSubmit)="login()">
+      <h2 class="ms-title">Welcome back</h2>
+      <p class="ms-subtitle">Sign in to continue to MarketSense.</p>
+
+      <form
+        class="ms-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        novalidate
+      >
+        @if (loginError) {
+          <div class="ms-alert" role="alert">
+            <span class="material-icons" aria-hidden="true">error_outline</span>
+            <p>{{ loginError }}</p>
+          </div>
+        }
+
         <!-- EMAIL -->
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">
-            Email Address
-          </label>
-
+          <label class="ms-label" for="email">Email</label>
           <input
+            id="email"
             type="email"
             formControlName="email"
-            placeholder="john@example.com"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+            autocomplete="email"
+            placeholder="amina@company.com"
+            class="ms-input"
+            [class.ms-input--error]="
+              loginForm.controls.email.touched &&
+              loginForm.controls.email.invalid
+            "
           />
+          @if (
+            loginForm.controls.email.touched && loginForm.controls.email.invalid
+          ) {
+            <p class="ms-hint ms-hint--error">
+              <span class="material-icons">error_outline</span>
+              Enter a valid email, like name&#64;company.com.
+            </p>
+          }
         </div>
 
         <!-- PASSWORD -->
         <div>
-          <div class="flex justify-between items-center mb-2">
-            <label for="password" class="text-sm font-medium text-gray-700">
-              Password
-            </label>
-
-            <a
-              routerLink="/forgot-password"
-              class="text-sm text-blue-600 hover:text-blue-800 transition"
+          <div class="ms-label-row">
+            <label class="ms-label" for="password">Password</label>
+            <a class="ms-link" routerLink="/forgot-password"
+              >Forgot password?</a
             >
-              Forgot Password?
-            </a>
           </div>
-
-          <div class="relative">
+          <div class="ms-input-wrap">
             <input
               id="password"
               [type]="showPassword ? 'text' : 'password'"
-              placeholder="Enter your password"
               formControlName="password"
-              class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500 transition"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              class="ms-input ms-input--has-toggle"
+              [class.ms-input--error]="
+                loginForm.controls.password.touched &&
+                loginForm.controls.password.invalid
+              "
             />
-
             <button
               type="button"
+              class="ms-toggle"
               (click)="showPassword = !showPassword"
-              class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-400 hover:text-blue-600 transition focus:outline-none focus:text-blue-600 cursor-pointer"
+              [attr.aria-label]="
+                showPassword ? 'Hide password' : 'Show password'
+              "
             >
               <span class="material-icons">
                 {{ showPassword ? "visibility_off" : "visibility" }}
               </span>
             </button>
           </div>
+          @if (
+            loginForm.controls.password.touched &&
+            loginForm.controls.password.invalid
+          ) {
+            <p class="ms-hint ms-hint--error">
+              <span class="material-icons">error_outline</span>
+              Enter your password.
+            </p>
+          }
         </div>
 
-        <!-- REMEMBER ME -->
-        <div class="flex items-center justify-between">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              class="w-4 h-4 text-blue-600 border-gray-300 rounded"
-            />
-
-            <span class="text-sm text-gray-600"> Remember Me </span>
-          </label>
-        </div>
-
-        <!-- LOGIN BUTTON -->
-        <button
-          type="submit"
-          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition cursor-pointer"
-        >
-          Sign In
+        <button type="submit" class="ms-submit" [disabled]="isSubmitting">
+          @if (isSubmitting) {
+            <span class="ms-spinner" aria-hidden="true"></span>
+            Signing in…
+          } @else {
+            Sign in
+          }
         </button>
       </form>
 
-      <!-- DIVIDER -->
-      <div class="relative my-6">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-gray-200"></div>
-        </div>
-
-        <div class="relative flex justify-center">
-          <span class="bg-white px-4 text-sm text-gray-500"> OR </span>
-        </div>
-      </div>
-
-      <!-- FUTURE SOCIAL LOGIN -->
-      <button
-        disabled
-        class="w-full border border-gray-300 py-3 rounded-lg text-gray-400 cursor-not-allowed"
-      >
-        Google Sign-In (Coming Soon)
-      </button>
-
-      <!-- REGISTER LINK -->
-      <div class="mt-6 text-center">
-        <span class="text-gray-500"> Don't have an account? </span>
-
-        <a
-          routerLink="/register"
-          class="text-blue-600 hover:text-blue-800 font-medium ml-1 cursor-pointer"
-        >
-          Create Account
-        </a>
-      </div>
+      <p class="ms-switch">
+        Don't have an account?
+        <a routerLink="/register">Create one</a>
+      </p>
     </div>
-  </div>
+  </main>
 </div>

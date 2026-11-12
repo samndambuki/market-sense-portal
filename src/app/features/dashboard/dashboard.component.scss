@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  color: #101828;
+  font-size: 13px;
+  zoom: 0.7;
+}
+
+.dash-title {
+  margin: 0;
+  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.dash-panel {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.dash-panel-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dash-stat {
+  margin: 6px 0 2px;
+  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.dash-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #2f5bea;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dash-btn:hover {
+  background: #2448c4;
+}
+
+.dash-btn:focus-visible {
+  outline: 3px solid rgba(47, 91, 234, 0.4);
+  outline-offset: 2px;
+}
+
+.dash-btn--ghost {
+  border: 1px solid #f3c2c2;
+  background: #fff;
+  color: #9b2c2c;
+}
+
+.dash-btn--ghost:hover {
+  background: #fff5f5;
+}
+
+.dash-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 -8px;
+  padding: 10px 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.dash-row:hover {
+  background: #f5f7fb;
+}
+
+.dash-row:focus-visible {
+  outline: 2px solid #2f5bea;
+  outline-offset: -2px;
+}
+
+.dash-badge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.dash-badge--low {
+  background: #e8f6ef;
+  color: #1f7a55;
+}
+
+.dash-badge--medium {
+  background: #fff4e0;
+  color: #9a5b00;
+}
+
+.dash-badge--high {
+  background: #fdecec;
+  color: #b42323;
+}
+
+.dash-skel {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #eef1f6 25%, #f6f8fb 50%, #eef1f6 75%);
+  background-size: 200% 100%;
+  animation: dash-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes dash-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-badge {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dash-skel {
+    animation: none;
+  }
+}

@@ -1,41 +1,67 @@
-<div
-  [ngClass]="collapsed ? 'w-52' : 'w-96'"
-  class="h-screen bg-blue-900 text-white flex-shrink-0"
->
-  <div class="p-4 font-semibold border-b border-gray-500">
-    <span class="material-icons align-middle mr-2">psychology</span>
-    <span *ngIf="!collapsed">{{ "TITLE" | translate }} </span>
-    <span *ngIf="collapsed">MS</span>
+<aside class="sb" [class.sb--collapsed]="collapsed">
+  <!-- BRAND -->
+  <div class="sb-brand">
+    <span class="sb-mark" aria-hidden="true">
+      <svg width="13" height="13" viewBox="0 0 18 18" fill="none">
+        <rect
+          x="1"
+          y="10"
+          width="3.5"
+          height="7"
+          rx="1"
+          fill="#fff"
+          fill-opacity=".55"
+        />
+        <rect
+          x="7.25"
+          y="6"
+          width="3.5"
+          height="11"
+          rx="1"
+          fill="#fff"
+          fill-opacity=".8"
+        />
+        <rect x="13.5" y="1" width="3.5" height="16" rx="1" fill="#fff" />
+      </svg>
+    </span>
+    @if (!collapsed) {
+      <span class="sb-brand-name" [attr.title]="'TITLE' | translate">
+        MarketSense
+      </span>
+    }
   </div>
-  <nav class="p-4 space-y-2">
-    <a
-      routerLink="/dashboard"
-      routerLinkActive="bg-blue-800"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="block px-3 py-2 rounded-md hover:bg-blue-700 transition"
-    >
-      <span class="material-icons mr-2 align-middle">dashboard</span>
-      <span *ngIf="!collapsed">Dashboard</span>
-      <span *ngIf="collapsed">DB</span>
-    </a>
-    <a
-      routerLink="/markets"
-      routerLinkActive="bg-blue-800"
-      class="block px-3 py-2 bg-blue-800 hover:bg-blue-700 hover:rounded-md transition rounded-md"
-    >
-      <span class="material-icons mr-2 align-middle">manage_search</span>
-      <span *ngIf="!collapsed">{{ "MARKET_EXPLORER" | translate }}</span>
-      <span *ngIf="collapsed">ME</span>
-    </a>
 
-    <a
-      routerLink="/competitor-analysis"
-      routerLinkActive="bg-blue-800"
-      class="block px-3 py-2 rounded-md bg-blue-800 hover:bg-blue-700 hover:rounded-md transition rounded-md"
-    >
-      <span class="material-icons mr-2 align-middle">trending_up</span>
-      <span *ngIf="!collapsed">{{ "COMPETITOR_ANALYSIS" | translate }}</span>
-      <span *ngIf="collapsed"> CA</span>
-    </a>
+  <!-- NAV -->
+  <nav class="sb-nav" aria-label="Main">
+    @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="sb-link--active"
+        [routerLinkActiveOptions]="{ exact: !!item.exact }"
+        #rla="routerLinkActive"
+        [attr.aria-current]="rla.isActive ? 'page' : null"
+        [attr.title]="
+          collapsed
+            ? item.translate
+              ? (item.label | translate)
+              : item.label
+            : null
+        "
+        class="sb-link"
+      >
+        <span class="material-icons sb-icon" aria-hidden="true">{{
+          item.icon
+        }}</span>
+        @if (!collapsed) {
+          <span class="sb-label">{{
+            item.translate ? (item.label | translate) : item.label
+          }}</span>
+        } @else {
+          <span class="sr-only">{{
+            item.translate ? (item.label | translate) : item.label
+          }}</span>
+        }
+      </a>
+    }
   </nav>
-</div>
+</aside>
