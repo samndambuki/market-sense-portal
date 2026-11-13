@@ -1,36 +1,46 @@
 :host {
   display: block;
-  font-family: "Instrument Sans", system-ui, sans-serif;
-  font-size: 13px;
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-size: var(--text-sm, 12px);
   color: #101828;
-  zoom: 0.75;
+}
+
+/* text sizes used in the template (from the global scale in styles.css) */
+.ca-base {
+  font-size: var(--text-base, 13px);
+}
+
+.ca-text {
+  font-size: var(--text-sm, 12px);
+}
+
+.ca-small {
+  font-size: var(--text-2xs, 10.5px);
 }
 
 .ca {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 20px 16px;
+  min-width: 0;
 }
 
 @media (min-width: 640px) {
   .ca {
-    padding: 24px;
+    min-width: 0;
   }
 }
 
 .ca-title {
   margin: 0;
-  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
-  font-size: 20px;
+  font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+  font-size: var(--text-lg, 16px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
 .ca-panel {
-  padding: 16px 18px;
+  padding: 14px 16px;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #fff;
 }
 
@@ -39,14 +49,14 @@
 .ca-field {
   box-sizing: border-box;
   width: 100%;
-  height: 36px;
-  padding: 0 32px 0 12px;
+  height: 32px;
+  padding: 0 28px 0 10px;
   border: 1px solid #d9dfea;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #fff;
   color: #101828;
   font: inherit;
-  font-size: 13px;
+  font-size: var(--text-sm, 12px);
   appearance: none;
   cursor: pointer;
   transition:
@@ -73,9 +83,9 @@
 .ca-chevron {
   position: absolute;
   top: 50%;
-  right: 8px;
+  right: 7px;
   transform: translateY(-50%);
-  font-size: 18px;
+  font-size: 16px;
   color: #98a2b3;
   pointer-events: none;
 }
@@ -86,19 +96,23 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 14px;
+  gap: 5px;
+  height: 32px;
+  padding: 0 12px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #2f5bea;
   color: #fff;
   font: inherit;
-  font-size: 13px;
+  font-size: var(--text-sm, 12px);
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.15s ease;
+}
+
+.ca-btn .material-icons {
+  font-size: 15px;
 }
 
 .ca-btn:hover:not(:disabled) {
@@ -116,12 +130,12 @@
 }
 
 .ca-btn--ghost {
-  height: 30px;
-  padding: 0 10px;
+  height: 28px;
+  padding: 0 9px;
   border: 1px solid #d9dfea;
   background: #fff;
   color: #101828;
-  font-size: 12.5px;
+  font-size: var(--text-sm, 12px);
 }
 
 .ca-btn--ghost:hover:not(:disabled) {
@@ -129,11 +143,11 @@
 }
 
 .ca-btn--quiet {
-  height: 30px;
-  padding: 0 10px;
+  height: 28px;
+  padding: 0 9px;
   background: transparent;
   color: #2f5bea;
-  font-size: 12.5px;
+  font-size: var(--text-sm, 12px);
 }
 
 .ca-btn--quiet:hover:not(:disabled) {
@@ -144,26 +158,26 @@
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
   background: #eef2fd;
   color: #2f5bea;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .ca-chip {
-  padding: 3px 9px;
+  padding: 2px 8px;
   border-radius: 999px;
   background: #f1f4f9;
   color: #475569;
-  font-size: 11.5px;
+  font-size: var(--text-2xs, 10.5px);
 }
 
 /* AI text rendered from Markdown ([innerHTML] needs ::ng-deep) */
 
 :host ::ng-deep .ca-prose {
-  font-size: 13px;
+  font-size: var(--text-sm, 12px);
   line-height: 1.65;
   color: #344054;
 }
@@ -176,21 +190,21 @@
 :host ::ng-deep .ca-prose h2,
 :host ::ng-deep .ca-prose h3,
 :host ::ng-deep .ca-prose h4 {
-  margin: 18px 0 6px;
-  font-size: 13.5px;
+  margin: 14px 0 4px;
+  font-size: var(--text-base, 13px);
   font-weight: 600;
   line-height: 1.4;
   color: #101828;
 }
 
 :host ::ng-deep .ca-prose p {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
 }
 
 :host ::ng-deep .ca-prose ul,
 :host ::ng-deep .ca-prose ol {
-  margin: 0 0 10px;
-  padding-left: 18px;
+  margin: 0 0 8px;
+  padding-left: 16px;
 }
 
 :host ::ng-deep .ca-prose ul {
@@ -202,7 +216,7 @@
 }
 
 :host ::ng-deep .ca-prose li {
-  margin: 3px 0;
+  margin: 2px 0;
 }
 
 :host ::ng-deep .ca-prose li::marker {
@@ -224,14 +238,14 @@
   display: block;
   overflow-x: auto;
   width: 100%;
-  margin: 8px 0 14px;
+  margin: 6px 0 12px;
   border-collapse: collapse;
-  font-size: 12.5px;
+  font-size: var(--text-xs, 11.5px);
 }
 
 :host ::ng-deep .ca-prose th,
 :host ::ng-deep .ca-prose td {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border: 1px solid #e2e8f0;
   text-align: left;
   vertical-align: top;
@@ -253,8 +267,8 @@
 }
 
 .ca-spinner {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: #fff;
   border-radius: 50%;
@@ -262,8 +276,8 @@
 }
 
 .ca-spinner--blue {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-color: #c9d4f7;
   border-top-color: #2f5bea;
 }
@@ -277,6 +291,13 @@
 @keyframes ca-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* iPhone/iPad zoom in on fields under 16px; iOS only */
+@supports (-webkit-touch-callout: none) {
+  .ca-field {
+    font-size: 16px;
   }
 }
 

@@ -1,15 +1,15 @@
 <div class="ca">
   <!-- HEADER -->
-  <div class="mb-5">
+  <div class="mb-4">
     <h1 class="ca-title">Competitor analysis</h1>
-    <p class="mt-1 text-[13px] text-slate-500">
+    <p class="mt-1 ca-text text-slate-500">
       Pick a market to see who it's up against and where the openings are.
     </p>
   </div>
 
   <!-- PICKER -->
   <section class="ca-panel">
-    <label for="market" class="block text-[12.5px] font-semibold text-slate-800"
+    <label for="market" class="block ca-text font-semibold text-slate-800"
       >Market</label
     >
 
@@ -17,7 +17,7 @@
       <div
         class="mt-2 flex items-center justify-between gap-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2.5"
       >
-        <p class="text-[12.5px] text-red-800">Couldn't load your markets.</p>
+        <p class="ca-text text-red-800">Couldn't load your markets.</p>
         <button
           type="button"
           class="ca-btn ca-btn--ghost"
@@ -57,9 +57,7 @@
             <span class="ca-spinner" aria-hidden="true"></span>
             Analysing…
           } @else {
-            <span class="material-icons text-base" aria-hidden="true"
-              >auto_awesome</span
-            >
+            <span class="material-icons" aria-hidden="true">auto_awesome</span>
             Analyse competitors
           }
         </button>
@@ -67,7 +65,7 @@
 
       <!-- quick context for the chosen market -->
       @if (selectedMarket) {
-        <p class="mt-2.5 text-[12px] text-slate-500">
+        <p class="mt-2 ca-small text-slate-500">
           {{ selectedMarket.category }}, {{ selectedMarket.region }}.
           {{ selectedMarket.growthRate }}% growth,
           {{ selectedMarket.players.length }}
@@ -79,9 +77,9 @@
   </section>
 
   <!-- RESULT AREA -->
-  <section class="ca-panel mt-4" aria-live="polite">
+  <section class="ca-panel mt-3" aria-live="polite">
     @if (loading) {
-      <p class="mb-3 flex items-center gap-2 text-xs text-slate-500">
+      <p class="mb-3 flex items-center gap-2 ca-small text-slate-500">
         <span class="ca-spinner ca-spinner--blue" aria-hidden="true"></span>
         Analysing {{ analysedMarket?.name }}… this can take a few seconds.
       </p>
@@ -97,7 +95,7 @@
       <div
         class="flex flex-col items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-3.5 sm:flex-row sm:items-center sm:justify-between"
       >
-        <p class="text-[13px] text-red-800">{{ error }}</p>
+        <p class="ca-text text-red-800">{{ error }}</p>
         <button type="button" class="ca-btn ca-btn--ghost" (click)="analyze()">
           Try again
         </button>
@@ -109,7 +107,7 @@
             >auto_awesome</span
           >
           <div>
-            <h2 class="text-sm font-semibold text-slate-900">
+            <h2 class="ca-base font-semibold text-slate-900">
               Competitive landscape:
               <a
                 [routerLink]="['/markets', analysedMarket.id]"
@@ -118,29 +116,27 @@
                 {{ analysedMarket.name }}
               </a>
             </h2>
-            <p class="text-[11.5px] text-slate-500">
+            <p class="ca-small text-slate-500">
               Written by AI. Check important details before acting on them.
             </p>
           </div>
         </div>
         <button type="button" class="ca-btn ca-btn--quiet" (click)="analyze()">
-          <span class="material-icons text-base" aria-hidden="true"
-            >refresh</span
-          >
+          <span class="material-icons" aria-hidden="true">refresh</span>
           Regenerate
         </button>
       </div>
-      <div class="ca-prose mt-4" [innerHTML]="analysisHtml"></div>
+      <div class="ca-prose mt-3" [innerHTML]="analysisHtml"></div>
     } @else {
       <!-- before the first analysis: say what they'll get -->
       <div class="py-6 text-center">
-        <span class="material-icons text-3xl text-slate-300" aria-hidden="true"
+        <span class="material-icons text-2xl text-slate-300" aria-hidden="true"
           >insights</span
         >
-        <p class="mt-2 text-sm font-semibold text-slate-900">
+        <p class="mt-2 ca-base font-semibold text-slate-900">
           Your analysis will appear here
         </p>
-        <p class="mt-1 text-xs text-slate-500">
+        <p class="mt-1 ca-small text-slate-500">
           Choose a market above. The report covers:
         </p>
         <ul class="mx-auto mt-3 flex max-w-md flex-wrap justify-center gap-1.5">

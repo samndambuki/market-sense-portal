@@ -3,7 +3,7 @@
   <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
     <div>
       <h1 class="dash-title">Market overview</h1>
-      <p class="mt-1 text-[13px] text-slate-500">
+      <p class="mt-1 dash-text text-slate-500">
         A snapshot of every market you track.
       </p>
     </div>
@@ -18,33 +18,33 @@
   <!-- LOADING -->
   @if (isLoading) {
     <div
-      class="mt-6 grid grid-cols-2 xl:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200"
+      class="mt-4 grid grid-cols-2 xl:grid-cols-4 gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200"
     >
       @for (i of [1, 2, 3, 4]; track i) {
-        <div class="bg-white p-4">
+        <div class="bg-white px-4 py-3">
           <div class="dash-skel h-3 w-24"></div>
-          <div class="dash-skel mt-4 h-8 w-16"></div>
+          <div class="dash-skel mt-3 h-6 w-14"></div>
           <div class="dash-skel mt-3 h-3 w-32"></div>
         </div>
       }
     </div>
-    <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
-      <div class="dash-skel h-80 lg:col-span-3 rounded-2xl"></div>
-      <div class="dash-skel h-80 lg:col-span-2 rounded-2xl"></div>
+    <div class="mt-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
+      <div class="dash-skel h-64 lg:col-span-3 rounded-xl"></div>
+      <div class="dash-skel h-64 lg:col-span-2 rounded-xl"></div>
     </div>
   } @else if (hasError) {
     <div
-      class="mt-6 flex flex-col items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-6 sm:flex-row sm:items-center sm:justify-between"
+      class="mt-4 flex flex-col items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 sm:flex-row sm:items-center sm:justify-between"
     >
       <div class="flex items-start gap-3">
         <span class="material-icons text-red-500" aria-hidden="true"
           >cloud_off</span
         >
         <div>
-          <p class="text-[13px] font-semibold text-red-800">
+          <p class="dash-text font-semibold text-red-800">
             Couldn't load your markets
           </p>
-          <p class="text-[13px] text-red-700">
+          <p class="dash-text text-red-700">
             Check your connection, then try again.
           </p>
         </div>
@@ -59,59 +59,59 @@
     </div>
   } @else if (!markets.length) {
     <div
-      class="mt-6 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center"
+      class="mt-4 rounded-xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center"
     >
       <span class="material-icons text-3xl text-slate-300" aria-hidden="true"
         >insights</span
       >
-      <p class="mt-3 text-sm font-semibold text-slate-900">No markets yet</p>
-      <p class="mx-auto mt-1 max-w-sm text-[13px] text-slate-500">
+      <p class="mt-3 dash-base font-semibold text-slate-900">No markets yet</p>
+      <p class="mx-auto mt-1 max-w-sm dash-text text-slate-500">
         Once markets are added, their growth, risk and categories show up here.
       </p>
-      <a routerLink="/markets" class="dash-btn mt-5">Go to Market Explorer</a>
+      <a routerLink="/markets" class="dash-btn mt-4">Go to Market Explorer</a>
     </div>
   } @else {
     <!-- KEY NUMBERS: one strip, four cells -->
     <section
-      class="mt-6 grid grid-cols-2 xl:grid-cols-4 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200"
+      class="mt-4 grid grid-cols-2 xl:grid-cols-4 gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200"
       aria-label="Key numbers"
     >
-      <div class="bg-white p-4">
-        <p class="text-[13px] text-slate-500">Markets tracked</p>
+      <div class="bg-white px-4 py-3">
+        <p class="dash-text text-slate-500">Markets tracked</p>
         <p class="dash-stat">{{ totalMarkets }}</p>
-        <p class="text-[11.5px] text-slate-500">
+        <p class="dash-small text-slate-500">
           Across {{ totalCategories }}
           {{ totalCategories === 1 ? "category" : "categories" }}
         </p>
       </div>
 
-      <div class="bg-white p-4">
-        <p class="text-[13px] text-slate-500">Average growth</p>
+      <div class="bg-white px-4 py-3">
+        <p class="dash-text text-slate-500">Average growth</p>
         <p class="dash-stat text-emerald-700">
           {{ averageGrowth | number: "1.1-1" }}%
         </p>
         @if (fastestMarket) {
-          <p class="truncate text-[11.5px] text-slate-500">
+          <p class="truncate dash-small text-slate-500">
             Fastest: {{ fastestMarket.name }} ({{ fastestMarket.growthRate }}%)
           </p>
         }
       </div>
 
-      <div class="bg-white p-4">
-        <p class="text-[13px] text-slate-500">High-risk markets</p>
+      <div class="bg-white px-4 py-3">
+        <p class="dash-text text-slate-500">High-risk markets</p>
         <p class="dash-stat" [class.text-red-600]="highRiskMarkets > 0">
           {{ highRiskMarkets }}
         </p>
-        <p class="text-[11.5px] text-slate-500">
+        <p class="dash-small text-slate-500">
           {{ highRiskShare | number: "1.0-0" }}% of tracked markets
         </p>
       </div>
 
-      <div class="bg-white p-4">
-        <p class="text-[13px] text-slate-500">Categories</p>
+      <div class="bg-white px-4 py-3">
+        <p class="dash-text text-slate-500">Categories</p>
         <p class="dash-stat">{{ totalCategories }}</p>
         @if (categories[0]) {
-          <p class="truncate text-[11.5px] text-slate-500">
+          <p class="truncate dash-small text-slate-500">
             Largest: {{ categories[0].name }}
           </p>
         }
@@ -119,28 +119,25 @@
     </section>
 
     <!-- CHARTS -->
-    <div class="mt-6 grid grid-cols-1 lg:grid-cols-5 gap-6">
+    <div class="mt-4 grid grid-cols-1 lg:grid-cols-5 gap-4">
       <!-- Growth ranking -->
       <section class="dash-panel flex flex-col lg:col-span-3">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
             <h2 class="dash-panel-title">Growth by market</h2>
-            <p class="mt-1 text-[13px] text-slate-500">
+            <p class="mt-1 dash-text text-slate-500">
               Annual growth rate, fastest first
             </p>
           </div>
-          <ul
-            class="flex gap-3 text-[11.5px] text-slate-500"
-            aria-label="Legend"
-          >
+          <ul class="flex gap-3 dash-small text-slate-500" aria-label="Legend">
             <li class="flex items-center gap-1.5">
-              <span class="h-2.5 w-2.5 rounded-sm bg-[#1F9D6B]"></span>15%+
+              <span class="h-2 w-2 rounded-sm bg-[#1F9D6B]"></span>15%+
             </li>
             <li class="flex items-center gap-1.5">
-              <span class="h-2.5 w-2.5 rounded-sm bg-[#F5A524]"></span>10–15%
+              <span class="h-2 w-2 rounded-sm bg-[#F5A524]"></span>10–15%
             </li>
             <li class="flex items-center gap-1.5">
-              <span class="h-2.5 w-2.5 rounded-sm bg-[#94A3B8]"></span>Under 10%
+              <span class="h-2 w-2 rounded-sm bg-[#94A3B8]"></span>Under 10%
             </li>
           </ul>
         </div>
@@ -160,11 +157,9 @@
       <!-- Category mix -->
       <section class="dash-panel lg:col-span-2">
         <h2 class="dash-panel-title">Markets by category</h2>
-        <p class="mt-1 text-[13px] text-slate-500">
-          How your coverage is spread
-        </p>
+        <p class="mt-1 dash-text text-slate-500">How your coverage is spread</p>
 
-        <div class="relative mx-auto mt-4 h-44 w-44">
+        <div class="relative mx-auto mt-4 h-36 w-36">
           <canvas
             baseChart
             [type]="doughnutChartType"
@@ -174,18 +169,18 @@
           <div
             class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
           >
-            <span class="dash-stat" style="margin: 0; font-size: 20px">{{
+            <span class="dash-stat" style="margin: 0; font-size: 16px">{{
               totalMarkets
             }}</span>
-            <span class="text-[11.5px] text-slate-500">markets</span>
+            <span class="dash-small text-slate-500">markets</span>
           </div>
         </div>
 
-        <ul class="mt-5 space-y-2">
+        <ul class="mt-4 space-y-2">
           @for (category of categories; track category.name) {
-            <li class="flex items-center gap-3 text-[13px]">
+            <li class="flex items-center gap-2.5 dash-text">
               <span
-                class="h-2.5 w-2.5 shrink-0 rounded-full"
+                class="h-2 w-2 shrink-0 rounded-full"
                 [style.background]="category.color"
               ></span>
               <span class="flex-1 truncate text-slate-700">{{
@@ -194,7 +189,7 @@
               <span class="font-semibold text-slate-900">{{
                 category.count
               }}</span>
-              <span class="w-10 text-right text-[11.5px] text-slate-400">
+              <span class="w-10 text-right dash-small text-slate-400">
                 {{ category.share | number: "1.0-0" }}%
               </span>
             </li>
@@ -204,12 +199,12 @@
     </div>
 
     <!-- FASTEST-GROWING LIST -->
-    <section class="dash-panel mt-6">
+    <section class="dash-panel mt-4">
       <div class="flex items-center justify-between gap-3">
         <h2 class="dash-panel-title">Fastest-growing markets</h2>
         <a
           routerLink="/markets"
-          class="text-[13px] font-semibold text-[#2F5BEA] hover:underline"
+          class="dash-text font-semibold text-[#2F5BEA] hover:underline"
         >
           See all
         </a>
@@ -220,11 +215,11 @@
           <a [routerLink]="['/markets', market.id]" class="dash-row group">
             <div class="min-w-0 flex-1">
               <p
-                class="truncate text-[13px] font-medium text-slate-900 group-hover:text-[#2F5BEA]"
+                class="truncate dash-text font-medium text-slate-900 group-hover:text-[#2F5BEA]"
               >
                 {{ market.name }}
               </p>
-              <p class="truncate text-[11.5px] text-slate-500">
+              <p class="truncate dash-small text-slate-500">
                 {{ market.category }}, {{ market.region }}
               </p>
             </div>
@@ -241,7 +236,7 @@
               {{ riskLabel(market.riskLevel) }} risk
             </span>
             <span
-              class="w-14 text-right text-[13px] font-semibold text-slate-900"
+              class="w-14 text-right dash-text font-semibold text-slate-900"
             >
               {{ market.growthRate }}%
             </span>

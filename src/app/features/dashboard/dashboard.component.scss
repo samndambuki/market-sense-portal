@@ -1,38 +1,50 @@
 :host {
   display: block;
-  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-family: var(--font-sans, "Instrument Sans", system-ui, sans-serif);
+  font-size: var(--text-sm, 12px);
   color: #101828;
-  font-size: 13px;
-  zoom: 0.7;
+}
+
+/* text sizes used in the template (from the global scale in styles.css) */
+.dash-base {
+  font-size: var(--text-base, 13px);
+}
+
+.dash-text {
+  font-size: var(--text-sm, 12px);
+}
+
+.dash-small {
+  font-size: var(--text-2xs, 10.5px);
 }
 
 .dash-title {
   margin: 0;
-  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
-  font-size: 20px;
+  font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+  font-size: var(--text-lg, 16px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .dash-panel {
   min-width: 0;
-  padding: 16px 18px;
+  padding: 14px 16px;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 12px;
   background: #fff;
 }
 
 .dash-panel-title {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--text-base, 13px);
   font-weight: 600;
 }
 
 .dash-stat {
-  margin: 6px 0 2px;
-  font-family: "Bricolage Grotesque", "Instrument Sans", sans-serif;
-  font-size: 22px;
+  margin: 4px 0 2px;
+  font-family: var(--font-display, "Bricolage Grotesque", sans-serif);
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
@@ -42,20 +54,24 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 34px;
-  padding: 0 12px;
+  gap: 4px;
+  height: 30px;
+  padding: 0 10px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #2f5bea;
   color: #fff;
   font: inherit;
-  font-size: 13px;
+  font-size: var(--text-sm, 12px);
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   transition: background-color 0.15s ease;
+}
+
+.dash-btn .material-icons {
+  font-size: 14px;
 }
 
 .dash-btn:hover {
@@ -80,10 +96,10 @@
 .dash-row {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 0 -8px;
-  padding: 10px 8px;
-  border-radius: 10px;
+  gap: 12px;
+  margin: 0 -6px;
+  padding: 8px 6px;
+  border-radius: 8px;
   text-decoration: none;
   transition: background-color 0.15s ease;
 }
@@ -97,13 +113,17 @@
   outline-offset: -2px;
 }
 
+.dash-row .material-icons {
+  font-size: 16px;
+}
+
 .dash-badge {
   flex-shrink: 0;
-  padding: 2px 8px;
+  padding: 1px 7px;
   border-radius: 999px;
   background: #f1f5f9;
   color: #475569;
-  font-size: 11px;
+  font-size: var(--text-2xs, 10.5px);
   font-weight: 500;
 }
 

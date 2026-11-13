@@ -5,6 +5,7 @@ import { Market } from '../../models/market.model';
 import { MarketService } from '../../services/market.service';
 
 type GrowthLevel = 'High' | 'Medium' | 'Low';
+type SortKey = 'growth' | 'name';
 
 @Component({
   selector: 'app-market-list',
@@ -25,9 +26,16 @@ export class MarketListComponent implements OnInit {
   selectedRegion = 'All';
   selectedGrowth = 'All';
 
+  /** Default: fastest-growing first */
+  sortKey: SortKey = 'growth';
+  sortAsc = false;
+
   /** Filter options come from the data, so they always match real markets */
   categories: string[] = [];
   regions: string[] = [];
+
+  /** Growth bars are drawn relative to this (at least 25%) */
+  growthScale = 25;
 
   ngOnInit(): void {
     this.loadMarkets();
@@ -42,6 +50,7 @@ export class MarketListComponent implements OnInit {
         this.markets = data;
         this.categories = [...new Set(data.map((m) => m.category))].sort();
         this.regions = [...new Set(data.map((m) => m.region))].sort();
+        this.growthScale = Math.max(25, ...data.map((m) => m.growthRate));
         this.isLoading = false;
         this.applyFilters();
       },
@@ -56,7 +65,7 @@ export class MarketListComponent implements OnInit {
   applyFilters(): void {
     const term = this.searchTerm.trim().toLowerCase();
 
-    this.filteredMarkets = this.markets.filter((market) => {
+    const filtered = this.markets.filter((market) => {
       const matchesSearch =
         !term ||
         market.name.toLowerCase().includes(term) ||
@@ -74,6 +83,29 @@ export class MarketListComponent implements OnInit {
 
       return matchesSearch && matchesCategory && matchesRegion && matchesGrowth;
     });
+
+    const dir = this.sortAsc ? 1 : -1;
+    this.filteredMarkets = filtered.sort((a, b) =>
+      this.sortKey === 'name'
+        ? a.name.localeCompare(b.name) * dir
+        : (a.growthRate - b.growthRate) * dir,
+    );
+  }
+
+  /** Click a column header: sort by it, or flip direction if it's already active */
+  sortBy(key: SortKey): void {
+    if (this.sortKey === key) {
+      this.sortAsc = !this.sortAsc;
+    } else {
+      this.sortKey = key;
+      this.sortAsc = key === 'name'; // names A–Z, growth highest first
+    }
+    this.applyFilters();
+  }
+
+  ariaSort(key: SortKey): 'ascending' | 'descending' | 'none' {
+    if (this.sortKey !== key) return 'none';
+    return this.sortAsc ? 'ascending' : 'descending';
   }
 
   get hasActiveFilters(): boolean {
@@ -95,6 +127,10 @@ export class MarketListComponent implements OnInit {
 
   growthLevel(rate: number): GrowthLevel {
     return rate >= 15 ? 'High' : rate >= 10 ? 'Medium' : 'Low';
+  }
+
+  growthWidth(rate: number): number {
+    return Math.max(4, Math.min(100, (rate / this.growthScale) * 100));
   }
 
   /** "HIGH" -> "High" */

@@ -1,4 +1,6 @@
-@use "tailwindcss";
+/* Tailwind v4: plain CSS import (not Sass @use) */
+@import "tailwindcss";
+
 /* ===== MarketSense: global type scale ===== */
 :root {
   /* fonts */
@@ -8,15 +10,14 @@
   /* one set of sizes for the whole app */
   --text-2xs: 10.5px; /* badges, tiny labels */
   --text-xs: 11.5px; /* hints, captions, meta */
-  --text-sm: 12px; /* buttons, menus, table cells */
+  --text-sm: 12px; /* buttons, menus, labels */
   --text-base: 13px; /* normal body text */
   --text-md: 14px; /* panel / card titles */
   --text-lg: 16px; /* section headings */
   --text-xl: 20px; /* page titles */
 }
 
-/* Shrinks every Tailwind size (text-sm, p-4, gap-6, h-10…) by ~12%.
-   Tailwind uses rem units, and 1rem = this value. */
+/* Tailwind sizes (text-sm, p-4, gap-6, h-10...) are in rem; 1rem = this */
 html {
   font-size: 14px;
 }
@@ -31,7 +32,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* inputs and buttons use the app font, not the browser default */
 button,
 input,
 select,
@@ -39,8 +39,7 @@ textarea {
   font: inherit;
 }
 
-/* smaller default icons (Material Icons defaults to 24px).
-   Any text-* class or component style on an icon still wins. */
+/* smaller default icons (Material Icons defaults to 24px) */
 .material-icons {
   font-size: 18px;
 }

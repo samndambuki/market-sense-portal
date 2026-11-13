@@ -1,17 +1,13 @@
 <div class="ml">
   <!-- HEADER -->
-  <div class="mb-5">
+  <div class="ml-head">
     <h1 class="ml-title">Market explorer</h1>
-    <p class="mt-1 text-[13px] text-slate-500">
-      Browse markets by category, region and growth.
-    </p>
+    <p class="ml-sub">Browse markets by category, region and growth.</p>
   </div>
 
   <!-- FILTERS -->
-  <div
-    class="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]"
-  >
-    <label class="relative block">
+  <div class="ml-filters">
+    <label class="ml-search">
       <span class="sr-only">Search markets</span>
       <span class="material-icons ml-field-icon" aria-hidden="true"
         >search</span
@@ -21,11 +17,11 @@
         [(ngModel)]="searchTerm"
         (input)="applyFilters()"
         placeholder="Search by name, category or region"
-        class="ml-field pl-9"
+        class="ml-field ml-field--search"
       />
     </label>
 
-    <label class="relative block">
+    <label class="ml-select-wrap">
       <span class="sr-only">Category</span>
       <select
         [(ngModel)]="selectedCategory"
@@ -42,7 +38,7 @@
       >
     </label>
 
-    <label class="relative block">
+    <label class="ml-select-wrap">
       <span class="sr-only">Region</span>
       <select
         [(ngModel)]="selectedRegion"
@@ -59,7 +55,7 @@
       >
     </label>
 
-    <label class="relative block">
+    <label class="ml-select-wrap">
       <span class="sr-only">Growth level</span>
       <select
         [(ngModel)]="selectedGrowth"
@@ -77,29 +73,22 @@
     </label>
   </div>
 
-  <!-- LOADING -->
   @if (isLoading) {
-    <div class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div class="ml-table">
       @for (i of [1, 2, 3, 4, 5, 6]; track i) {
-        <div class="ml-skel h-48 rounded-xl"></div>
+        <div class="ml-skel-row">
+          <div class="ml-skel" style="width: 38%"></div>
+          <div class="ml-skel" style="width: 18%"></div>
+          <div class="ml-skel" style="width: 10%"></div>
+        </div>
       }
     </div>
   } @else if (hasError) {
-    <div
-      class="mt-5 flex flex-col items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <div class="flex items-start gap-2.5">
-        <span class="material-icons text-xl text-red-500" aria-hidden="true"
-          >cloud_off</span
-        >
-        <div>
-          <p class="text-[13px] font-semibold text-red-800">
-            Couldn't load markets
-          </p>
-          <p class="text-xs text-red-700">
-            Check your connection, then try again.
-          </p>
-        </div>
+    <div class="ml-error">
+      <span class="material-icons" aria-hidden="true">cloud_off</span>
+      <div class="ml-error-text">
+        <p class="ml-error-title">Couldn't load markets</p>
+        <p>Check your connection, then try again.</p>
       </div>
       <button type="button" class="ml-btn" (click)="loadMarkets()">
         Try again
@@ -107,8 +96,8 @@
     </div>
   } @else {
     <!-- RESULT COUNT + CLEAR -->
-    <div class="mt-5 mb-3 flex items-center justify-between gap-3">
-      <p class="text-xs text-slate-500" i18n>
+    <div class="ml-meta-row">
+      <p class="ml-count" i18n>
         {filteredMarkets.length, plural,
           =0 {No markets found}
           =1 {Showing 1 market}
@@ -117,72 +106,76 @@
       </p>
       @if (hasActiveFilters) {
         <button type="button" class="ml-link" (click)="clearFilters()">
-          <span class="material-icons text-sm" aria-hidden="true">close</span>
+          <span class="material-icons" aria-hidden="true">close</span>
           Clear filters
         </button>
       }
     </div>
 
     @if (filteredMarkets.length) {
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+      <div class="ml-table" role="table" aria-label="Markets">
+        <!-- column headers (hidden on phones) -->
+        <div class="ml-row ml-row--head" role="row">
+          <div role="columnheader" [attr.aria-sort]="ariaSort('name')">
+            <button type="button" class="ml-sort" (click)="sortBy('name')">
+              Market
+              @if (sortKey === "name") {
+                <span class="material-icons" aria-hidden="true">
+                  {{ sortAsc ? "arrow_upward" : "arrow_downward" }}
+                </span>
+              }
+            </button>
+          </div>
+          <div role="columnheader" [attr.aria-sort]="ariaSort('growth')">
+            <button type="button" class="ml-sort" (click)="sortBy('growth')">
+              Growth
+              @if (sortKey === "growth") {
+                <span class="material-icons" aria-hidden="true">
+                  {{ sortAsc ? "arrow_upward" : "arrow_downward" }}
+                </span>
+              }
+            </button>
+          </div>
+          <div role="columnheader">Risk</div>
+          <div role="columnheader">Key players</div>
+          <div aria-hidden="true"></div>
+        </div>
+
         @for (market of filteredMarkets; track market.id) {
-          <a [routerLink]="['/markets', market.id]" class="ml-card group">
-            <!-- name + growth -->
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <h3
-                  class="truncate text-sm font-semibold text-slate-900 group-hover:text-[#2F5BEA]"
-                >
-                  {{ market.name }}
-                </h3>
-                <p class="mt-0.5 truncate text-xs text-slate-500">
-                  {{ market.category }}, {{ market.region }}
-                </p>
-              </div>
-              <div class="shrink-0 text-right">
-                <p class="text-base font-semibold leading-tight text-slate-900">
-                  {{ market.growthRate }}%
-                </p>
-                <p
-                  class="text-[11px] font-medium"
-                  [class.text-emerald-700]="
-                    growthLevel(market.growthRate) === 'High'
-                  "
-                  [class.text-amber-700]="
-                    growthLevel(market.growthRate) === 'Medium'
-                  "
-                  [class.text-slate-500]="
-                    growthLevel(market.growthRate) === 'Low'
-                  "
-                >
-                  {{ growthLevel(market.growthRate) }} growth
-                </p>
-              </div>
+          <a
+            [routerLink]="['/markets', market.id]"
+            class="ml-row"
+            role="row"
+            [attr.title]="market.description"
+          >
+            <!-- market -->
+            <div class="ml-cell-market" role="cell">
+              <p class="ml-name">{{ market.name }}</p>
+              <p class="ml-place">{{ market.category }}, {{ market.region }}</p>
             </div>
 
-            <!-- description -->
-            <p
-              class="mt-3 line-clamp-2 text-[12.5px] leading-relaxed text-slate-600"
-            >
-              {{ market.description }}
-            </p>
+            <!-- growth: number + bar -->
+            <div class="ml-cell-growth" role="cell">
+              <span class="ml-growth-value">{{ market.growthRate }}%</span>
+              <span class="ml-meter" aria-hidden="true">
+                <span
+                  class="ml-meter-fill"
+                  [class.ml-meter-fill--high]="
+                    growthLevel(market.growthRate) === 'High'
+                  "
+                  [class.ml-meter-fill--medium]="
+                    growthLevel(market.growthRate) === 'Medium'
+                  "
+                  [style.width.%]="growthWidth(market.growthRate)"
+                ></span>
+              </span>
+              <span class="sr-only"
+                >{{ growthLevel(market.growthRate) }} growth</span
+              >
+            </div>
 
-            <!-- players -->
-            @if (market.players.length) {
-              <div class="mt-3 flex flex-wrap gap-1">
-                @for (player of market.players.slice(0, 3); track player.id) {
-                  <span class="ml-chip">{{ player.companyName }}</span>
-                }
-                @if (market.players.length > 3) {
-                  <span class="ml-chip"
-                    >+{{ market.players.length - 3 }} more</span
-                  >
-                }
-              </div>
-            }
-
-            <!-- footer -->
-            <div class="ml-card-footer">
+            <!-- risk -->
+            <div class="ml-cell-risk" role="cell">
               <span
                 class="ml-badge"
                 [class.ml-badge--low]="market.riskLevel.toUpperCase() === 'LOW'"
@@ -195,46 +188,43 @@
               >
                 {{ riskLabel(market.riskLevel) }} risk
               </span>
-              <span
-                class="flex items-center gap-0.5 text-xs font-semibold text-[#2F5BEA]"
-              >
-                View insights
-                <span
-                  class="material-icons text-sm transition-transform group-hover:translate-x-0.5"
-                  aria-hidden="true"
-                >
-                  chevron_right
-                </span>
-              </span>
             </div>
+
+            <!-- players -->
+            <div class="ml-cell-players" role="cell">
+              @if (market.players.length) {
+                @for (player of market.players.slice(0, 2); track player.id) {
+                  <span class="ml-chip">{{ player.companyName }}</span>
+                }
+                @if (market.players.length > 2) {
+                  <span class="ml-chip ml-chip--more"
+                    >+{{ market.players.length - 2 }}</span
+                  >
+                }
+              } @else {
+                <span class="ml-none">None added</span>
+              }
+            </div>
+
+            <span class="material-icons ml-go" aria-hidden="true"
+              >chevron_right</span
+            >
           </a>
         }
       </div>
     } @else {
       <!-- EMPTY -->
-      <div
-        class="rounded-xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center"
-      >
-        <span class="material-icons text-3xl text-slate-300" aria-hidden="true"
-          >search_off</span
-        >
+      <div class="ml-empty">
+        <span class="material-icons" aria-hidden="true">search_off</span>
         @if (markets.length) {
-          <p class="mt-2 text-sm font-semibold text-slate-900">
-            No markets match these filters
-          </p>
-          <p class="mt-1 text-xs text-slate-500">
-            Try a different search or clear the filters.
-          </p>
-          <button type="button" class="ml-btn mt-4" (click)="clearFilters()">
+          <p class="ml-empty-title">No markets match these filters</p>
+          <p>Try a different search or clear the filters.</p>
+          <button type="button" class="ml-btn" (click)="clearFilters()">
             Clear filters
           </button>
         } @else {
-          <p class="mt-2 text-sm font-semibold text-slate-900">
-            No markets yet
-          </p>
-          <p class="mt-1 text-xs text-slate-500">
-            Markets you add will appear here.
-          </p>
+          <p class="ml-empty-title">No markets yet</p>
+          <p>Markets you add will appear here.</p>
         }
       </div>
     }

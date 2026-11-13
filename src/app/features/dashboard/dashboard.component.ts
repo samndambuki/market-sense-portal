@@ -9,9 +9,8 @@ import { MarketService } from '../market-explorer/services/market.service';
 Chart.register(...registerables);
 Chart.defaults.font.family = "'Instrument Sans', system-ui, sans-serif";
 Chart.defaults.color = '#5B6478';
-Chart.defaults.font.size = 11;
+Chart.defaults.font.size = 10.5;
 
-/** Same thresholds the Market Explorer uses for its growth badges */
 const GROWTH_COLORS = { High: '#1F9D6B', Medium: '#F5A524', Low: '#94A3B8' };
 
 const CATEGORY_COLORS = [
@@ -62,7 +61,7 @@ export class DashboardComponent implements OnInit {
   };
 
   barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    indexAxis: 'y', // horizontal bars: long market names stay readable
+    indexAxis: 'y',
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -83,7 +82,6 @@ export class DashboardComponent implements OnInit {
         border: { display: false },
         ticks: {
           color: '#101828',
-          // shorten very long market names so they don't get cut off on phones
           callback(value) {
             const label = String(this.getLabelForValue(Number(value)));
             return label.length > 20 ? `${label.slice(0, 19)}…` : label;
@@ -98,7 +96,7 @@ export class DashboardComponent implements OnInit {
     maintainAspectRatio: false,
     cutout: '72%',
     plugins: {
-      legend: { display: false }, // we render our own legend beside the chart
+      legend: { display: false },
       tooltip: {
         callbacks: {
           label: (ctx) => ` ${ctx.parsed} market${ctx.parsed === 1 ? '' : 's'}`,
@@ -155,7 +153,7 @@ export class DashboardComponent implements OnInit {
             (m) => GROWTH_COLORS[this.growthTier(m.growthRate)],
           ),
           borderRadius: 6,
-          maxBarThickness: 18,
+          maxBarThickness: 14,
         },
       ],
     };
@@ -189,8 +187,8 @@ export class DashboardComponent implements OnInit {
   }
 
   get barChartHeight(): number {
-    // ~30px per market so bars never get squashed
-    return Math.max(220, this.markets.length * 30);
+    // ~26px per market so bars never get squashed
+    return Math.max(200, this.markets.length * 26);
   }
 
   get totalMarkets(): number {
