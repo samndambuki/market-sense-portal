@@ -73,11 +73,16 @@
   } @else {
     <!-- KEY NUMBERS: one strip, four cells -->
     <section
-      class="mt-4 grid grid-cols-2 xl:grid-cols-4 gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200"
+      class="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4"
       aria-label="Key numbers"
     >
-      <div class="bg-white px-4 py-3">
-        <p class="dash-text text-slate-500">Markets tracked</p>
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <p class="dash-text text-slate-500">Markets tracked</p>
+          <span class="material-icons dash-card-icon" aria-hidden="true"
+            >travel_explore</span
+          >
+        </div>
         <p class="dash-stat">{{ totalMarkets }}</p>
         <p class="dash-small text-slate-500">
           Across {{ totalCategories }}
@@ -85,8 +90,15 @@
         </p>
       </div>
 
-      <div class="bg-white px-4 py-3">
-        <p class="dash-text text-slate-500">Average growth</p>
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <p class="dash-text text-slate-500">Average growth</p>
+          <span
+            class="material-icons dash-card-icon dash-card-icon--green"
+            aria-hidden="true"
+            >trending_up</span
+          >
+        </div>
         <p class="dash-stat text-emerald-700">
           {{ averageGrowth | number: "1.1-1" }}%
         </p>
@@ -97,8 +109,15 @@
         }
       </div>
 
-      <div class="bg-white px-4 py-3">
-        <p class="dash-text text-slate-500">High-risk markets</p>
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <p class="dash-text text-slate-500">High-risk markets</p>
+          <span
+            class="material-icons dash-card-icon dash-card-icon--red"
+            aria-hidden="true"
+            >warning_amber</span
+          >
+        </div>
         <p class="dash-stat" [class.text-red-600]="highRiskMarkets > 0">
           {{ highRiskMarkets }}
         </p>
@@ -107,8 +126,15 @@
         </p>
       </div>
 
-      <div class="bg-white px-4 py-3">
-        <p class="dash-text text-slate-500">Categories</p>
+      <div class="dash-card">
+        <div class="dash-card-head">
+          <p class="dash-text text-slate-500">Categories</p>
+          <span
+            class="material-icons dash-card-icon dash-card-icon--violet"
+            aria-hidden="true"
+            >category</span
+          >
+        </div>
         <p class="dash-stat">{{ totalCategories }}</p>
         @if (categories[0]) {
           <p class="truncate dash-small text-slate-500">

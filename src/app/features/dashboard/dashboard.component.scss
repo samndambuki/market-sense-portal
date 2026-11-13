@@ -5,6 +5,50 @@
   color: #101828;
 }
 
+/* key-number cards */
+
+.dash-card {
+  min-width: 0; /* lets long "Fastest: …" text truncate instead of stretching the card */
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.dash-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dash-card-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #eef2fd;
+  color: #2f5bea;
+  font-size: 15px;
+}
+
+.dash-card-icon--green {
+  background: #e8f6ef;
+  color: #1f7a55;
+}
+
+.dash-card-icon--red {
+  background: #fdecec;
+  color: #b42323;
+}
+
+.dash-card-icon--violet {
+  background: #f1ecfe;
+  color: #6d4ed8;
+}
+
 /* text sizes used in the template (from the global scale in styles.css) */
 .dash-base {
   font-size: var(--text-base, 13px);
