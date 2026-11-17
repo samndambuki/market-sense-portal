@@ -5,7 +5,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 interface NavItem {
   route: string;
   icon: string;
-  /** Text shown in the menu. If `translate` is true it's an ngx-translate key. */
   label: string;
   translate: boolean;
   exact?: boolean;
